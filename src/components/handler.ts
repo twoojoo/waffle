@@ -1,7 +1,6 @@
 import type { RouteOptions, RouteGenericInterface, RouteHandlerMethod, RawServerDefault, RawRequestDefaultExpression, RawReplyDefaultExpression } from 'fastify'
-import type { IncomingMessage, Server as HTTPServer, ServerResponse } from "http";
-import type { RouteContext, DefaultRouteTypes } from './routes'
 import { Server, ServerContext, serverFactory } from './server'
+import type { RouteContext } from './routes'
 
 export type Handler<RouteTypes extends RouteGenericInterface> = {
   handler: (handler: RouteHandlerMethod<RawServerDefault, RawRequestDefaultExpression, RawReplyDefaultExpression, RouteTypes>) => Server
@@ -24,7 +23,7 @@ export function handlerFactory<RouteTypes extends RouteGenericInterface>(serverC
         path = "/v" + serverCtx.version + path
       }
 
-      const options: RouteOptions/*<HTTPServer, IncomingMessage, ServerResponse, RouteTypes>*/ = {
+      const options: RouteOptions = {
         method: routeCtx.method,
         url: path,
         handler: handler as RouteHandlerMethod,
@@ -32,8 +31,6 @@ export function handlerFactory<RouteTypes extends RouteGenericInterface>(serverC
       }
 
       serverCtx.fastify.route(options)
-      // serverCtx.fastify[routeCtx.method]<RouteTypes>(path, handler)
-
       return serverFactory(serverCtx)
     }
   }

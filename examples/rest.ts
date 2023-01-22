@@ -8,6 +8,8 @@ let users = [
 	{ id: 3, name: "Bob" }
 ]
 
+// <mehtod> http://lcoalhost:3000/v1/users
+
 server.version(1)
 	.prefix("users")
 	.get(":id").handler(async (req, rep) => rep.send(users.find(u => u.id == req.body.id)))

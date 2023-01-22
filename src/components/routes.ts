@@ -2,7 +2,7 @@ import { Handler, handlerFactory } from './handler'
 import { HTTPMethods, RouteGenericInterface } from "fastify"
 import type { ServerContext } from './server'
 
-type Method = (path?: string) => Route
+type Method = <RouteTypes extends RouteGenericInterface = DefaultRouteTypes>(path?: string) => Route<RouteTypes>
 
 export type Routes = {
   get: Method,
@@ -20,7 +20,7 @@ export type RouteContext = {
 }
 
 export type DefaultRouteTypes = {
-  Body: any, 
+  Body: { [key: string]: any }, 
   Querystring: { [key: string]: string }, 
   Params: { [key: string]: string }, 
   Headers: { [key: string]: string }, 
