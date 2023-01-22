@@ -10,7 +10,7 @@ let users = [
 
 server.version(1)
 	.prefix("users")
-	.get(":id").handler(async (req, rep) => rep.send(users.find(u => u.id == (req.params as any).id)))
+	.get(":id").handler(async (req, rep) => rep.send(users.find(u => u.id == req.body.id)))
 	.delete(":id").handler(async (req, rep) => {
 		const id = (req.params as any).id
 		const user = users.find(u => u == id)

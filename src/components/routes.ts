@@ -1,15 +1,8 @@
 import { Handler, handlerFactory } from './handler'
+import { HTTPMethods, RouteGenericInterface } from "fastify"
 import type { ServerContext } from './server'
 
 type Method = (path?: string) => Route
-
-enum HTTPMethod {
-  GET = "get",
-  POST = "post",
-  PUT = "put",
-  PATCH = "patch",
-  DELETE = "delete"
-}
 
 export type Routes = {
   get: Method,
@@ -19,34 +12,42 @@ export type Routes = {
   delete: Method
 }
 
-type Route = Handler & {}
+type Route<RouteTypes extends RouteGenericInterface> = Handler<RouteTypes> & {}
 
 export type RouteContext = {
-  method: HTTPMethod,
+  method: HTTPMethods,
   path: string,
+}
+
+export type DefaultRouteTypes = {
+  Body: any, 
+  Querystring: { [key: string]: string }, 
+  Params: { [key: string]: string }, 
+  Headers: { [key: string]: string }, 
+  Reply: any
 }
 
 export function routesFactory(serverCtx: ServerContext): Routes {
   return {
-    get(path: string = ""): Route {
-      const routeCtx: RouteContext = { method: HTTPMethod.GET, path }
-      return { ...handlerFactory(serverCtx, routeCtx) }
+    get<RouteTypes extends RouteGenericInterface = DefaultRouteTypes>(path: string = ""): Route<RouteTypes> {
+      const routeCtx: RouteContext = { method: "GET", path }
+      return { ...handlerFactory<RouteTypes>(serverCtx, routeCtx) }
     },
-    post(path: string = ""): Route {
-      const routeCtx: RouteContext = { method: HTTPMethod.POST, path }
-      return { ...handlerFactory(serverCtx, routeCtx) }
+    post<RouteTypes extends RouteGenericInterface = DefaultRouteTypes>(path: string = ""): Route<RouteTypes> {
+      const routeCtx: RouteContext = { method: "POST", path }
+      return { ...handlerFactory<RouteTypes>(serverCtx, routeCtx) }
     },
-    put(path: string = ""): Route {
-      const routeCtx: RouteContext = { method: HTTPMethod.PUT, path }
-      return { ...handlerFactory(serverCtx, routeCtx) }
+    put<RouteTypes extends RouteGenericInterface = DefaultRouteTypes>(path: string = ""): Route<RouteTypes> {
+      const routeCtx: RouteContext = { method: "PUT", path }
+      return { ...handlerFactory<RouteTypes>(serverCtx, routeCtx) }
     },
-    patch(path: string = ""): Route {
-      const routeCtx: RouteContext = { method: HTTPMethod.PATCH, path }
-      return { ...handlerFactory(serverCtx, routeCtx) }
+    patch<RouteTypes extends RouteGenericInterface = DefaultRouteTypes>(path: string = ""): Route<RouteTypes> {
+      const routeCtx: RouteContext = { method: "PATCH", path }
+      return { ...handlerFactory<RouteTypes>(serverCtx, routeCtx) }
     },
-    delete(path: string = ""): Route {
-      const routeCtx: RouteContext = { method: HTTPMethod.DELETE, path }
-      return { ...handlerFactory(serverCtx, routeCtx) }
+    delete<RouteTypes extends RouteGenericInterface = DefaultRouteTypes>(path: string = ""): Route<RouteTypes> {
+      const routeCtx: RouteContext = { method: "DELETE", path }
+      return { ...handlerFactory<RouteTypes>(serverCtx, routeCtx) }
     }
   }
 }

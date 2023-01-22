@@ -11,11 +11,11 @@ const server = Server({ logger: true })
 
 server.version(1)
 	.prefix("users")
-	.get(":id").handler(async (req, rep) => rep.send({ id: (req.params as any).id }))
+	.get(":id").handler(async (req, rep) => rep.send({ id: req.params.id }))
 
 server.version(2)
 	.prefix("customers")
-	.get(":id").handler(async (req, rep) => rep.send({ id: (req.params as any).id }))
+	.get(":id").handler(async (req, rep) => rep.send({ id: req.params.id }))
 
 server.address("localhost", 3001)
 	.listen()
