@@ -16,7 +16,7 @@ export type ServerContext = {
   prefix: string | undefined,
 }
 
-export type Server = Routes & Listen & Address & Version & Prefix & Hooks & Limiter
+export type Server = Routes & Listen & Address & Version & Prefix & Hooks & Limiter & {fastify: FastifyInstance}
 
 export function Waffle(options?: FastifyServerOptions): Server {
   const serverCtx = defaultContext(options)
@@ -41,6 +41,7 @@ export function serverFactory(serverCtx: ServerContext): Server {
     ...versionFactory(serverCtx),
     ...prefixFactory(serverCtx),
     ...hooksFactory(serverCtx),
-    ...limiterFactory(serverCtx)
+    ...limiterFactory(serverCtx),
+    fastify: serverCtx.fastify
   } 
 }
