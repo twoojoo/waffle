@@ -7,6 +7,8 @@ type User = {
 	name: string,
 }
 
+type Params =  { id: number } 
+
 let users: User[] = [
 	{ id: 1, name: "John" }, 
 	{ id: 2, name: "Angela" }, 
@@ -18,10 +20,10 @@ let users: User[] = [
 server.version(1)
 	.prefix("users")
 
-	.GET<{ Params: { id: number } }>(":id")
+	.GET<{ Params: Params }>(":id")
 	.handler(async (req, rep) => rep.send(users.find(u => u.id == req.params.id)))
 
-	.DELETE<{ Params: { id: number } }>(":id")
+	.DELETE<{ Params: Params }>(":id")
 	.handler(async (req, rep) => {
 		const id = (req.params as any).id
 		const user = users.find(u => u == id)
@@ -35,7 +37,7 @@ server.version(1)
 		rep.send(req.body)
 	})
 
-	.PUT<{ Params: { id: number }, Body: Omit<User, "id"> }>(":id")
+	.PUT<{ Params: Params, Body: Omit<User, "id"> }>(":id")
 	.handler(async (req, rep) => {
 		const index = users.findIndex(u => u.id == req.params.id)
 		users[index].name = req.body.name

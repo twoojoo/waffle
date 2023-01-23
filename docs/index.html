@@ -60,7 +60,7 @@
       <div class="code-block">
         <div class="copy-code prevent-select">&#x2398</div>
 import { Server } from "@twoojoo/waffle"<br><br>
-Server().get("/ping").handler(async (_, rep) => rep.send("pong")).listen()
+Server().GET("/ping").handler(async (_, rep) => rep.send("pong")).listen()
       </div>
   </div>
 
@@ -77,6 +77,8 @@ type User = {<br>
 &emsp;&emsp;&emsp;name: string,<br>
 }<br><br>
 
+type Params =  { id: number }<br><br>
+
 let users: User[] = [<br>
 &emsp;&emsp;&emsp;{ id: 1, name: "John" }, <br>
 &emsp;&emsp;&emsp;{ id: 2, name: "Angela" }, <br>
@@ -86,10 +88,10 @@ let users: User[] = [<br>
 server.version(1)<br>
 &emsp;&emsp;&emsp;.prefix("users")<br><br>
 
-&emsp;&emsp;&emsp;.get<{ Params: { id: number } }>(":id")<br>
+&emsp;&emsp;&emsp;.GET<{ Params: Params }>(":id")<br>
 &emsp;&emsp;&emsp;.handler(async (req, rep) => rep.send(users.find(u => u.id == req.params.id)))<br><br>
 
-&emsp;&emsp;&emsp;.delete<{ Params: { id: number } }>(":id")<br>
+&emsp;&emsp;&emsp;.DELETE<{ Params: Params }>(":id")<br>
 &emsp;&emsp;&emsp;.handler(async (req, rep) => {<br>
   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;const id = (req.params as any).id<br>
   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;const user = users.find(u => u == id)<br>
@@ -97,13 +99,13 @@ server.version(1)<br>
   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;rep.send(user)<br>
 &emsp;&emsp;&emsp;})<br><br>
 
-&emsp;&emsp;&emsp;.post<{ Body: User }>()<br>
+&emsp;&emsp;&emsp;.POST<{ Body: User }>()<br>
 &emsp;&emsp;&emsp;.handler(async (req, rep) => {<br>
   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;users.push(req.body)<br>
   &emsp;&emsp;&emsp;rep.send(req.body)<br>
 &emsp;&emsp;&emsp;})<br><br>
 
-&emsp;&emsp;&emsp;.put<{ Params: { id: number }, Body: Omit&lt;User, "id"&gt; }>(":id")<br>
+&emsp;&emsp;&emsp;.PUT<{ Params: Params, Body: Omit&lt;User, "id"&gt; }>(":id")<br>
 &emsp;&emsp;&emsp;.handler(async (req, rep) => {<br>
   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;const index = users.findIndex(u => u.id == req.params.id)<br>
   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;users[index].name = req.body.name<br>
@@ -113,7 +115,7 @@ server.version(1)<br>
       <div class="code-text prevent-select" align="left" style="justify-content: start; gap: 3vh; padding: 3vh;">
         <div class="code-title">Rest API</div>
         <div class="code-description">CRUD operations at<br>localhost:3000/v1/users</div>
-        <div class="code-description">Define body, params<br>query and reply types<br>as generics</div>
+        <div class="code-description">Define Body, Params,<br>Query and Reply types<br>as generics</div>
       </div>
   </div>
 
