@@ -1,8 +1,9 @@
 {
   "name": "@twoojoo/waffle",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "description": "A Fastify wrapper that makse HTTP servers stupidly easy to build",
+  "url": "https://github.com/twoojoo/waffle",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc"
   },
@@ -17,8 +18,8 @@
     "framework",
     "api"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "twoojoo <twoojoo95@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "@fastify/rate-limit": "^7.6.0",
     "fastify": "^4.12.0"
