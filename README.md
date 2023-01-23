@@ -8,7 +8,7 @@ npm i @twoojoo/waffle
 
 ## Documentation
 
-Vistit the ![Waffle Websit](https://twoojoo.github.io/waffle/).
+Vistit the [Waffle Website](https://twoojoo.github.io/waffle/).
 
 ## Todo
 
