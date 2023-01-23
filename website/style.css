@@ -21,6 +21,7 @@ body::-webkit-scrollbar {
 body {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+  font-family: Kavoon;
 }
 
 #main-pane {
@@ -44,7 +45,7 @@ body {
   user-select: none; /* Standard syntax */
 }
 
-#top-bar {
+/*#top-bar {
 	position: absolute; 
 	top: 0;
 	left: 0; 
@@ -53,7 +54,7 @@ body {
 	background: #E0AF08; 
 	box-shadow: 2px 2px 4px #090909;
 }
-
+*/
 #main-container {
 /*	background: green;*/
 	display: flex;
@@ -62,6 +63,7 @@ body {
     align-items: center;
     gap: 5vw;
     margin: 4vw;
+	max-width: 70%;
 }
 
 #waffle-image {
@@ -69,6 +71,7 @@ body {
 }
 
 #main-title-container {
+/*	background: green;*/
 	display: flex;
 	flex-direction: column;
     justify-content: center;
@@ -76,20 +79,26 @@ body {
 	gap: 3vh;
 	width: fit-content;
 }
+
 .main-title {
+/*	background: blue;*/
 	width: fit-content;
 	color: #D29A02;
 	text-shadow: 4px 4px 4px #090909;
-	font-family: Kavoon;
+/*	font-family: Arimo;*/
 }
 
 #main-title {
+	width: fit-content;
 	font-size: 80px;
+	text-decoration: underline;
 }
 
 #main-subtitle {
-	width: 80%;
+	width: fit-content;
 	font-size: 30px;
+	font-family: monospace;
+	color: darkgray;
 }
 
 .code-sample {
@@ -97,42 +106,96 @@ body {
 	margin: 4vh;
 	gap: 2vw;
 	transition: all .3s ease-in-out; 
+/*	background: red;*/
 }
 
 .code-text {
 /*	padding: 3vh;*/
 	display: flex;
 	flex-direction: column;
-    justify-content: space-evenly;
+/*    justify-content: space-evenly;*/
+	justify-content: start; 
+	gap: 3vh; 
+	padding: 3vh;
 }
 
 .code-title {
-	font-size: 17px;
+	font-size: 18px;
 	color: #D29A02;
 	text-shadow: 4px 4px 4px #090909;
-	font-family: Kavoon;
 }
 
 .code-description {
 	font-size: 15px;
-	color: grey;
+	color: darkgray;
 	text-shadow: 4px 4px 4px #090909;
 	font-family: monospace;
 }
 
 .code-block {
+	position: relative;
+	display: block;
 	word-break: none;
 	padding: 4vh;
 	font-family: monospace;
 	font-size: 15px;
-	color: #ffffff;
+/*	color: wheat;*/
 	background: #08090B;
 	box-shadow: 5px 5px 4px #0f0f0f;
 	border-radius: 20px;
 	width: fit-content;
-	height: fit-content;
+	vertical-align: middle;
 }
 
 .code-sample:hover {
 	transform: scale(1.02); 
+}
+
+ a:link {
+      text-decoration: none;
+}
+
+a:visited {
+      text-decoration: none;
+}
+
+a:hover {
+      text-decoration: none;
+}
+
+a:active {
+      text-decoration: none;
+}
+
+.code-keyword {
+	color: mediumpurple;
+}
+
+.code-string {
+	color: lightgreen;
+}
+
+.code-function {
+	color: #D29A02;
+}
+
+.code-var{
+	color: lightcoral;
+}
+
+.copy-code {
+	cursor: pointer;
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: 1px solid grey;
+	color: solid grey;
+	border-radius: 7px;
+	padding: 5px;
+	margin: 10px;
+	visibility: hidden
+}
+
+.code-block:hover .copy-code{
+    visibility: visible;
 }
