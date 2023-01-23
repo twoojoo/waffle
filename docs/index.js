@@ -58,7 +58,8 @@ const scrollItems = [
 	"installation",
 	"ping",
 	"rest",
-	"hooks"
+	"hooks",
+	"next"
 ]
 
 let scrollPosition = "home"
@@ -83,4 +84,26 @@ document.addEventListener("keydown", e => {
 		window.scrollTo(0, getOffset(el).top - scrollOffset)
 	}
 })
+
+
+// const easterHTML = ``.split("")
+
+
+// const easter = document.getElementById("easter")
+// document.addEventListener("scroll", e => {
+// 	const bodyHeight = document.documentElement.scrollHeight
+// 	if (window.scrollY >= bodyHeight - window.innerHeight - 10) {
+// 		(function animate() {
+// 			if (easter.innerHTML[easter.innerHTML.length - 1] == ".") {
+// 				clearTimeout(running)
+// 				return
+// 			}
+// 			easter.innerHTML = easter.innerHTML.slice(0, -1)
+// 			easterHTML.length > 0 ? easter.innerHTML += easterHTML.shift() + "|" : clearTimeout(running); 
+// 			const time = Math.random() * 100; + 40
+// 			// console.log(time)
+// 			var running = setTimeout(animate, time);
+// 		})();
+// 	}
+// })
 
