@@ -1,1 +1,1 @@
-export { Server } from "./components/server"
+export { Waffle } from "./components/server"

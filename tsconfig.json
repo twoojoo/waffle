@@ -1,6 +1,7 @@
 {
     "extends": "@tsconfig/node18/tsconfig.json",
     "compilerOptions": {
+        "declaration": true,
         "outDir": "dist",
     },
     "include": [
@@ -8,6 +9,7 @@
     ],
     "exclude": [
         "node_modules",
-        "examples"
+        "examples",
+        "dist"
     ]
 }

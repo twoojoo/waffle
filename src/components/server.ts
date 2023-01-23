@@ -18,7 +18,7 @@ export type ServerContext = {
 
 export type Server = Routes & Listen & Address & Version & Prefix & Hooks & Limiter
 
-export function Server(options?: FastifyServerOptions): Server {
+export function Waffle(options?: FastifyServerOptions): Server {
   const serverCtx = defaultContext(options)
   return serverFactory(serverCtx)
 }

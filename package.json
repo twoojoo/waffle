@@ -6,7 +6,7 @@
   "repository": "https://github.com/twoojoo/waffle",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "rm -rf dist && tsc"
   },
   "keywords": [
     "fastify",
