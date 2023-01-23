@@ -1,4 +1,4 @@
-# <img align="left" src="./logo.png" alt="logo" width="86" height="86"> Waffle - A Fastify wrapper that makes HTTP servers stupidly easy to build
+# <img align="left" src="logo.png" alt="logo" width="86" height="86"> Waffle - A Fastify wrapper that makes HTTP servers stupidly easy to build
 
 ## Install
 
