@@ -62,17 +62,17 @@
       </div>
       <code class="code-block prettyprint">
         <!-- <div class="copy-code prevent-select">&#x2398</div> -->
-        import { Server } from "@twoojoo/waffle"<br><br>
-        Server().GET("/ping").handler(async (_, rep) => rep.send("pong")).listen()
+        import { Waffle } from "@twoojoo/waffle"<br><br>
+        Waffle().GET("/ping").handler(async (_, rep) => rep.send("pong")).listen()
       </code>
     </div>
 
     <div class="code-sample" id="rest">
       <code class="code-block prettyprint">
         <!-- <div class="copy-code prevent-select">&#x2398</div> -->
-        import { Server } from "@twoojoo/waffle"<br><br>
+        import { Waffle } from "@twoojoo/waffle"<br><br>
 
-        const server = Server({ logger: true })<br>
+        const server = Waffle({ logger: true })<br>
         &emsp;&emsp;&emsp;.address("localhost", 3000)<br><br>
 
         type User = {<br>
@@ -105,7 +105,7 @@
             &emsp;&emsp;&emsp;.POST<{ Body: User }>()<br>
               &emsp;&emsp;&emsp;.handler(async (req, rep) => {<br>
               &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;users.push(req.body)<br>
-              &emsp;&emsp;&emsp;rep.send(req.body)<br>
+              &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;rep.send(req.body)<br>
               &emsp;&emsp;&emsp;})<br><br>
 
               &emsp;&emsp;&emsp;.PUT<{ Params: Params, Body: Omit&lt;User, "id" &gt; }>(":id")<br>
@@ -132,9 +132,9 @@
       </div>
       <code class="code-block prettyprint">
         <!-- <div class="copy-code prevent-select">&#x2398</div> -->
-        import { Server } from "@twoojoo/waffle"<br><br>
+        import { Waffle } from "@twoojoo/waffle"<br><br>
 
-        const server = Server({ logger: true })<br>
+        const server = Waffle({ logger: true })<br>
         &emsp;&emsp;&emsp;.onRequest(async (req, rep) => console.log("1) on request hook"))<br>
         &emsp;&emsp;&emsp;.preParsing(async (req, rep) => console.log("2) pre parsing hook"))<br>
         &emsp;&emsp;&emsp;.preValidation(async (req, rep) => console.log("3) pre validation hook"))<br>
