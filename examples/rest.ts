@@ -1,6 +1,6 @@
-import { Server } from "../src"
+import { Waffle } from "../src"
 
-const server = Server({ logger: true })
+const server = Waffle({ logger: true })
 
 type User = {
 	id: number,

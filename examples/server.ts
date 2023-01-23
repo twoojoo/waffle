@@ -1,6 +1,6 @@
-import { Server } from "../src"
+import { Waffle } from "../src"
 
-const server = Server({ logger: true })
+const server = Waffle({ logger: true })
 	.onRequest(async (req, rep) => console.log("1) on request hook"))
 	.preParsing(async (req, rep) => console.log("2) pre parsing hook"))
 	.preValidation(async (req, rep) => console.log("3) pre validation hook"))
