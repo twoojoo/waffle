@@ -6,16 +6,9 @@
 npm i @twoojoo/waffle
 ```
 
-## Examples
+## Documentation
 
-One-line ping pong server
-
-```typescript
-import { Server } from "@twoojoo/waffle"
-
-//default address: 0.0.0.0:80
-Server().get("/ping").handler(async (_, rep) => rep.send("pong")).listen()
-```
+Vistit the ![Waffle Websit](https://twoojoo.github.io/waffle/).
 
 ## Todo
 
