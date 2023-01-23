@@ -51,3 +51,36 @@ var el = document.getElementById('main-subtitle');
 	// console.log(time)
 	var running = setTimeout(animate, time);
 })();
+
+
+const scrollItems = [
+	"home",
+	"installation",
+	"ping",
+	"rest",
+	"hooks"
+]
+
+let scrollPosition = "home"
+
+document.addEventListener("keydown", e => {
+	const currentIndex = scrollItems.indexOf(scrollPosition)
+	const scrollOffset = window.innerHeight * 0.10
+
+	if (e.keyCode == 38) {
+		e.preventDefault();
+		if (currentIndex == 0) return
+		scrollPosition = scrollItems[currentIndex - 1]
+		const el = document.getElementById(scrollPosition)
+		window.scrollTo(0, getOffset(el).top - scrollOffset)
+	}
+
+	else if (e.keyCode == 40) {
+		e.preventDefault();
+		if (currentIndex == scrollItems.length - 1) return
+		scrollPosition = scrollItems[currentIndex + 1]
+		const el = document.getElementById(scrollPosition)
+		window.scrollTo(0, getOffset(el).top - scrollOffset)
+	}
+})
+

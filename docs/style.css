@@ -27,18 +27,20 @@ body::-webkit-scrollbar {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 body {
+	width: 200vw;
 	-ms-overflow-style: none;
 	/* IE and Edge */
 	scrollbar-width: none;
 	/* Firefox */
 	font-family: Kavoon;
+	background: #10141C;
 }
 
 #main-pane {
 	position: relative;
 	top: 0;
 	left: 0;
-	width: 200vw;
+	width: 100vw;
 	min-height: 100vh;
 	height: fit-content;
 	background: #10141C;
@@ -48,6 +50,7 @@ body {
 	align-items: center;
 	justify-content: top;
 	gap: 12vh;
+	padding-bottom: 20vh;
 	/*	flex-wrap: wrap*/
 	/*  	justify-items: center;*/
 }
