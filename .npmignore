@@ -3,3 +3,4 @@ src
 examples
 node_modules
 .gitignore
+.npmrc
