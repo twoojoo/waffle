@@ -16,7 +16,7 @@ html {
 }
 
 html, body {
-    max-width: 100%;
+/*    max-width: 100%;*/
     overflow-x: hidden;
 }
 
@@ -38,7 +38,7 @@ body {
 	position: relative;
 	top: 0;
 	left: 0;
-	width: 100vw;
+	width: 200vw;
 	min-height: 100vh;
 	height: fit-content;
 	background: #10141C;
