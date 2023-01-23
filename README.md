@@ -1,5 +1,11 @@
 # <img align="left" src="./logo.png" alt="RxJS Logo" width="86" height="86"> Waffle - A Fastify wrapper that makse HTTP servers stupidly easy to build
 
+## Install
+
+```bash
+npm i @twoojoo/waffle
+```
+
 ## Examples
 
 One-line ping pong server
