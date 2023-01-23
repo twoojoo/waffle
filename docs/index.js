@@ -3,6 +3,8 @@
 // // hljs.registerLanguage("typescript", ts)
 // hljs.highlightAll()
 
+;
+
 const codeBlocks = document.getElementsByClassName("code-block")
 
 for (const cb of codeBlocks) {
@@ -13,8 +15,6 @@ for (const cb of codeBlocks) {
 }
 
 const extLink = document.getElementById("external-links")
-
-console.log(extLink)
 
 window.addEventListener("scroll", () => {
 	extLink.style.top = `${window.scrollY}px`
@@ -34,3 +34,20 @@ function getOffset(el) {
 		top: rect.top + window.scrollY
 	};
 }
+
+var string = "A Fastify wrapper that makes HTTP servers stupidly easy."
+
+// var string = "CodeHim is one of the BEST developer websites that provide web designers and developers with a simple way to preview and download a variety of free code & scripts.";
+var str = string.split("");
+var el = document.getElementById('main-subtitle');
+(function animate() {
+if(el.innerHTML[el.innerHTML.length -1] == ".") {
+	clearTimeout(running)
+	return
+}
+el.innerHTML = el.innerHTML.slice(0, -1)
+str.length > 0 ? el.innerHTML += str.shift() + "|" : clearTimeout(running); 
+const time = Math.random() * 100; + 40
+// console.log(time)
+var running = setTimeout(animate, time);
+})();

@@ -120,6 +120,15 @@ body {
 	font-size: 30px;
 	font-family: monospace;
 	color: darkgray;
+	min-height: 10vh;
+}
+
+#subtitle-fill {
+	width: fit-content;
+	font-size: 30px;
+	font-family: monospace;
+	visibility: hidden;
+	height: 1px;
 }
 
 .main-menu {
