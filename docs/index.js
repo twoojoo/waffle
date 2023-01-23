@@ -41,13 +41,13 @@ var string = "A Fastify wrapper that makes HTTP servers stupidly easy."
 var str = string.split("");
 var el = document.getElementById('main-subtitle');
 (function animate() {
-if(el.innerHTML[el.innerHTML.length -1] == ".") {
-	clearTimeout(running)
-	return
-}
-el.innerHTML = el.innerHTML.slice(0, -1)
-str.length > 0 ? el.innerHTML += str.shift() + "|" : clearTimeout(running); 
-const time = Math.random() * 100; + 40
-// console.log(time)
-var running = setTimeout(animate, time);
+	if (el.innerHTML[el.innerHTML.length - 1] == ".") {
+		clearTimeout(running)
+		return
+	}
+	el.innerHTML = el.innerHTML.slice(0, -1)
+	str.length > 0 ? el.innerHTML += str.shift() + "|" : clearTimeout(running); 
+	const time = Math.random() * 100; + 40
+	// console.log(time)
+	var running = setTimeout(animate, time);
 })();

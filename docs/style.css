@@ -1,36 +1,41 @@
-::-moz-selection { /* Code for Firefox */
-  color: #08090B;;
-  background: #E0AF08
+::-moz-selection {
+	/* Code for Firefox */
+	color: #08090B;
+	;
+	background: #E0AF08
 }
 
 ::selection {
-  color: #08090B;;
-  background: #E0AF08; 
+	color: #08090B;
+	;
+	background: #E0AF08;
 }
 
 html {
-  scroll-behavior: smooth;
+	scroll-behavior: smooth;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 body::-webkit-scrollbar {
-  display: none;
+	display: none;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
 body {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-  font-family: Kavoon;
+	-ms-overflow-style: none;
+	/* IE and Edge */
+	scrollbar-width: none;
+	/* Firefox */
+	font-family: Kavoon;
 }
 
 #main-pane {
-	position: relative; 
+	position: relative;
 	top: 0;
-	left: 0; 
-	width: 100vw; 
+	left: 0;
+	width: 100vw;
 	min-height: 100vh;
-	height: fit-content; 
+	height: fit-content;
 	background: #10141C;
 	display: flex;
 	flex-direction: column;
@@ -38,8 +43,8 @@ body {
 	align-items: center;
 	justify-content: top;
 	gap: 12vh;
-/*	flex-wrap: wrap*/
-/*  	justify-items: center;*/
+	/*	flex-wrap: wrap*/
+	/*  	justify-items: center;*/
 }
 
 #external-links {
@@ -49,13 +54,17 @@ body {
 	width: 6vh;
 	height: fit-content;
 	margin: 1vw;
-	color: #D29A02;;
+	color: #D29A02;
+	;
 }
 
 .prevent-select {
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
+	-webkit-user-select: none;
+	/* Safari */
+	-ms-user-select: none;
+	/* IE 10 and IE 11 */
+	user-select: none;
+	/* Standard syntax */
 }
 
 /*#top-bar {
@@ -71,42 +80,42 @@ body {
 .home-container {
 	display: flex;
 	flex-direction: column;
-  align-items: center;
-  justify-content: end;
-  height: 60vh
+	align-items: center;
+	justify-content: end;
+	height: 60vh
 }
 
 #main-container {
-/*	background: green;*/
+	/*	background: green;*/
 	display: flex;
-  align-items: center;
-  justify-content: center;
-  align-items: center;
-  gap: 5vw;
-  margin-bottom: 4vw;
+	align-items: center;
+	justify-content: center;
+	align-items: center;
+	gap: 5vw;
+	margin-bottom: 4vw;
 	max-width: 70%;
 }
 
 #waffle-image {
-	height:30vh ;
+	height: 30vh;
 }
 
 #main-title-container {
-/*	background: green;*/
+	/*	background: green;*/
 	display: flex;
 	flex-direction: column;
-    justify-content: center;
+	justify-content: center;
 	margin: auto;
 	gap: 3vh;
 	width: fit-content;
 }
 
 .main-title {
-/*	background: blue;*/
+	/*	background: blue;*/
 	width: fit-content;
 	color: #D29A02;
 	text-shadow: 4px 4px 4px #090909;
-/*	font-family: Arimo;*/
+	/*	font-family: Arimo;*/
 }
 
 #main-title {
@@ -142,15 +151,15 @@ body {
 }
 
 .main-menu-item {
-/*	background: red;*/
+	/*	background: red;*/
 	height: 10vh;
 	width: 100vw;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	color: #D29A02;
-/*	background: blue;*/
-font-size: 25px;
+	/*	background: blue;*/
+	font-size: 25px;
 	display: flex;
 	cursor: pointer;
 	width: fit-content;
@@ -160,17 +169,17 @@ font-size: 25px;
 	display: flex;
 	margin: 4vh;
 	gap: 2vw;
-	transition: all .3s ease-in-out; 
-/*	background: red;*/
+	transition: all .3s ease-in-out;
+	/*	background: red;*/
 }
 
 .code-text {
-/*	padding: 3vh;*/
+	/*	padding: 3vh;*/
 	display: flex;
 	flex-direction: column;
-/*    justify-content: space-evenly;*/
-	justify-content: start; 
-	gap: 3vh; 
+	/*    justify-content: space-evenly;*/
+	justify-content: start;
+	gap: 3vh;
 	padding: 3vh;
 }
 
@@ -203,26 +212,27 @@ font-size: 25px;
 }
 
 .code-sample:hover {
-	transform: scale(1.02); 
+	transform: scale(1.02);
 }
 
 a:link {
-      text-decoration: none;
+	text-decoration: none;
 }
 
 a:visited {
-      text-decoration: none;
+	text-decoration: none;
 }
 
 a:hover {
-      text-decoration: none;
+	text-decoration: none;
 }
 
 a:active {
-      text-decoration: none;
+	text-decoration: none;
 }
 
-svg, a {
+svg,
+a {
 	color: #D29A02;
 }
 
@@ -238,7 +248,7 @@ svg, a {
 	color: #D29A02;
 }
 
-.code-var{
+.code-var {
 	color: lightcoral;
 }
 
@@ -255,6 +265,6 @@ svg, a {
 	visibility: hidden
 }
 
-.code-block:hover .copy-code{
-    visibility: visible;
+.code-block:hover .copy-code {
+	visibility: visible;
 }
