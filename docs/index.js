@@ -47,7 +47,7 @@ var el = document.getElementById('main-subtitle');
 	}
 	el.innerHTML = el.innerHTML.slice(0, -1)
 	str.length > 0 ? el.innerHTML += str.shift() + "|" : clearTimeout(running); 
-	const time = Math.random() * 100; + 40
+	const time = 100
 	// console.log(time)
 	var running = setTimeout(animate, time);
 })();
