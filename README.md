@@ -1,4 +1,4 @@
-# <img align="left" src="https://raw.githubusercontent.com/twoojoo/waffle/master/logo.png" alt="logo" width="86" height="86"> Waffle - A Fastify wrapper that makes HTTP servers stupidly easy to build
+# <img align="left" src="https://raw.githubusercontent.com/twoojoo/waffle/master/logo.png?raw=true" alt="logo" width="86" height="86"> Waffle - A Fastify wrapper that makes HTTP servers stupidly easy to build
 
 ## Install
 
