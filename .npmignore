@@ -1,6 +1,7 @@
-tsconfig.json
 src
+website
 examples
 node_modules
+tsconfig.json
 .gitignore
 .npmrc

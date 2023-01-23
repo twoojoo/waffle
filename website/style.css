@@ -1,0 +1,138 @@
+::-moz-selection { /* Code for Firefox */
+  color: #08090B;;
+  background: #E0AF08
+}
+
+::selection {
+  color: #08090B;;
+  background: #E0AF08; 
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+#main-pane {
+	position: absolute; 
+	top: 0;
+	left: 0; 
+	width: 100vw; 
+	min-height: 100vh;
+	height: fit-content; 
+	background: #10141C;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+  	justify-content: top;
+/*  	justify-items: center;*/
+}
+
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+#top-bar {
+	position: absolute; 
+	top: 0;
+	left: 0; 
+	width: 100vw; 
+	height: 10vh; 
+	background: #E0AF08; 
+	box-shadow: 2px 2px 4px #090909;
+}
+
+#main-container {
+/*	background: green;*/
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    gap: 5vw;
+    margin: 4vw;
+}
+
+#waffle-image {
+	height:30vh ;
+}
+
+#main-title-container {
+	display: flex;
+	flex-direction: column;
+    justify-content: center;
+	margin: auto;
+	gap: 3vh;
+	width: fit-content;
+}
+.main-title {
+	width: fit-content;
+	color: #D29A02;
+	text-shadow: 4px 4px 4px #090909;
+	font-family: Kavoon;
+}
+
+#main-title {
+	font-size: 80px;
+}
+
+#main-subtitle {
+	width: 80%;
+	font-size: 30px;
+}
+
+.code-sample {
+	display: flex;
+	margin: 4vh;
+	gap: 2vw;
+	transition: all .3s ease-in-out; 
+}
+
+.code-text {
+/*	padding: 3vh;*/
+	display: flex;
+	flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.code-title {
+	font-size: 17px;
+	color: #D29A02;
+	text-shadow: 4px 4px 4px #090909;
+	font-family: Kavoon;
+}
+
+.code-description {
+	font-size: 15px;
+	color: grey;
+	text-shadow: 4px 4px 4px #090909;
+	font-family: monospace;
+}
+
+.code-block {
+	word-break: none;
+	padding: 4vh;
+	font-family: monospace;
+	font-size: 15px;
+	color: #ffffff;
+	background: #08090B;
+	box-shadow: 5px 5px 4px #0f0f0f;
+	border-radius: 20px;
+	width: fit-content;
+	height: fit-content;
+}
+
+.code-sample:hover {
+	transform: scale(1.02); 
+}
