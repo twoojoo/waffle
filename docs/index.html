@@ -32,6 +32,8 @@
 
   <div id="main-pane">
 
+    <div class="home-container">
+
     <a href="./index.html" id="main-container">
     <img id="waffle-image" src="./public/waffle.png" alt="logo">
     <div id="main-title-container">
@@ -40,7 +42,16 @@
     </div>
     </a>
 
-  <div class="code-sample">
+    <div class="main-menu prevent-select">
+      <div class="main-menu-item" id="menu-installation">Installation</div>
+      <div class="main-menu-item" id="menu-ping">Ping server</div>
+      <div class="main-menu-item" id="menu-rest">Rest API</div>
+      <div class="main-menu-item" id="menu-hooks">Hooks & Rate Limiter</div>
+    </div>
+
+  </div>
+
+  <div class="code-sample" id="installation">
       <div class="code-block">
         <div class="copy-code prevent-select">&#x2398</div>
         npm i @twoojoo/waffle
@@ -52,7 +63,7 @@
       </div>
   </div>
 
-  <div class="code-sample">
+  <div class="code-sample" id="ping">
       <div class="code-text prevent-select" align="right">
         <div class="code-title">One-line ping<br>pong server</div>
         <div class="code-description">Default address:<br>0.0.0.0:80 </div>
@@ -64,7 +75,7 @@ Server().GET("/ping").handler(async (_, rep) => rep.send("pong")).listen()
       </div>
   </div>
 
-  <div class="code-sample">
+  <div class="code-sample" id="rest">
       <div class="code-block">
         <div class="copy-code prevent-select">&#x2398</div>
 import { Server } from "@twoojoo/waffle"<br><br>
@@ -119,11 +130,11 @@ server.version(1)<br>
       </div>
   </div>
 
- <div class="code-sample">
+ <div class="code-sample" id="hooks">
       <div class="code-text prevent-select" align="right">
         <div class="code-title">Hooks & Rate Limiter</div>
-        <div class="code-description">All fastify hooks<br>available</div>
-        <div class="code-description">Built-in rate<br>limiter</div>
+        <div class="code-description">All fastify <a href="https://www.fastify.io/docs/latest/Reference/Hooks/" style="text-decoration: underline;">hooks</a><br>available</div>
+        <div class="code-description">Built-in <a href="https://github.com/fastify/fastify-rate-limit#options" style="text-decoration: underline;">rate<br>limiter</a></div>
       </div>
       <div class="code-block">
         <div class="copy-code prevent-select">&#x2398</div>
