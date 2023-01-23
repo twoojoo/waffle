@@ -25,7 +25,7 @@ body {
 }
 
 #main-pane {
-	position: absolute; 
+	position: relative; 
 	top: 0;
 	left: 0; 
 	width: 100vw; 
@@ -34,9 +34,21 @@ body {
 	background: #10141C;
 	display: flex;
 	flex-direction: column;
+	flex: 0 0 100%;
 	align-items: center;
-  	justify-content: top;
+	justify-content: top;
+/*	flex-wrap: wrap*/
 /*  	justify-items: center;*/
+}
+
+#external-links {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 6vh;
+	height: fit-content;
+	margin: 1vw;
+	color: #D29A02;;
 }
 
 .prevent-select {
@@ -139,7 +151,7 @@ body {
 	padding: 4vh;
 	font-family: monospace;
 	font-size: 15px;
-/*	color: wheat;*/
+	color: wheat;
 	background: #08090B;
 	box-shadow: 5px 5px 4px #0f0f0f;
 	border-radius: 20px;
@@ -151,7 +163,7 @@ body {
 	transform: scale(1.02); 
 }
 
- a:link {
+a:link {
       text-decoration: none;
 }
 
@@ -165,6 +177,10 @@ a:hover {
 
 a:active {
       text-decoration: none;
+}
+
+svg, a {
+	color: #D29A02;
 }
 
 .code-keyword {
