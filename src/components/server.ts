@@ -26,8 +26,8 @@ export function Server(options?: FastifyServerOptions): Server {
 function defaultContext(options: FastifyServerOptions = {}): ServerContext {
   return {
     fastify: Fastify(options),
-    host: "localhost",
-    port: 3000,
+    host: "0.0.0.0",
+    port: 80,
     version: undefined,
     prefix: undefined
   }
