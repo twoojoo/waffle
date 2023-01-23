@@ -5,7 +5,7 @@
 One-line ping pong server
 
 ```typescript
-import { Server } from "../src"
+import { Server } from "@twoojoo/waffle"
 
 //default address: localhost:3000
 Server().get("/ping").handler(async (_, rep) => rep.send("pong")).listen()
