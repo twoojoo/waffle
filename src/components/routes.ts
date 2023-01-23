@@ -5,11 +5,11 @@ import type { ServerContext } from './server'
 type Method = <RouteTypes extends RouteGenericInterface = DefaultRouteTypes>(path?: string) => Route<RouteTypes>
 
 export type Routes = {
-  get: Method,
-  post: Method,
-  put: Method,
-  patch: Method,
-  delete: Method
+  GET: Method,
+  POST: Method,
+  PUT: Method,
+  PATCH: Method,
+  DELETE: Method
 }
 
 type Route<RouteTypes extends RouteGenericInterface> = Handler<RouteTypes> & {}
@@ -29,23 +29,23 @@ export type DefaultRouteTypes = {
 
 export function routesFactory(serverCtx: ServerContext): Routes {
   return {
-    get<RouteTypes extends RouteGenericInterface = DefaultRouteTypes>(path: string = ""): Route<RouteTypes> {
+    GET<RouteTypes extends RouteGenericInterface = DefaultRouteTypes>(path: string = ""): Route<RouteTypes> {
       const routeCtx: RouteContext = { method: "GET", path }
       return { ...handlerFactory<RouteTypes>(serverCtx, routeCtx) }
     },
-    post<RouteTypes extends RouteGenericInterface = DefaultRouteTypes>(path: string = ""): Route<RouteTypes> {
+    POST<RouteTypes extends RouteGenericInterface = DefaultRouteTypes>(path: string = ""): Route<RouteTypes> {
       const routeCtx: RouteContext = { method: "POST", path }
       return { ...handlerFactory<RouteTypes>(serverCtx, routeCtx) }
     },
-    put<RouteTypes extends RouteGenericInterface = DefaultRouteTypes>(path: string = ""): Route<RouteTypes> {
+    PUT<RouteTypes extends RouteGenericInterface = DefaultRouteTypes>(path: string = ""): Route<RouteTypes> {
       const routeCtx: RouteContext = { method: "PUT", path }
       return { ...handlerFactory<RouteTypes>(serverCtx, routeCtx) }
     },
-    patch<RouteTypes extends RouteGenericInterface = DefaultRouteTypes>(path: string = ""): Route<RouteTypes> {
+    PATCH<RouteTypes extends RouteGenericInterface = DefaultRouteTypes>(path: string = ""): Route<RouteTypes> {
       const routeCtx: RouteContext = { method: "PATCH", path }
       return { ...handlerFactory<RouteTypes>(serverCtx, routeCtx) }
     },
-    delete<RouteTypes extends RouteGenericInterface = DefaultRouteTypes>(path: string = ""): Route<RouteTypes> {
+    DELETE<RouteTypes extends RouteGenericInterface = DefaultRouteTypes>(path: string = ""): Route<RouteTypes> {
       const routeCtx: RouteContext = { method: "DELETE", path }
       return { ...handlerFactory<RouteTypes>(serverCtx, routeCtx) }
     }

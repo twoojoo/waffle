@@ -18,10 +18,10 @@ let users: User[] = [
 server.version(1)
 	.prefix("users")
 
-	.get<{ Params: { id: number } }>(":id")
+	.GET<{ Params: { id: number } }>(":id")
 	.handler(async (req, rep) => rep.send(users.find(u => u.id == req.params.id)))
 
-	.delete<{ Params: { id: number } }>(":id")
+	.DELETE<{ Params: { id: number } }>(":id")
 	.handler(async (req, rep) => {
 		const id = (req.params as any).id
 		const user = users.find(u => u == id)
@@ -29,13 +29,13 @@ server.version(1)
 		rep.send(user)
 	})
 
-	.post<{ Body: User }>()
+	.POST<{ Body: User }>()
 	.handler(async (req, rep) => {
 		users.push(req.body)
 		rep.send(req.body)
 	})
 
-	.put<{ Params: { id: number }, Body: Omit<User, "id"> }>(":id")
+	.PUT<{ Params: { id: number }, Body: Omit<User, "id"> }>(":id")
 	.handler(async (req, rep) => {
 		const index = users.findIndex(u => u.id == req.params.id)
 		users[index].name = req.body.name
