@@ -1,12 +1,22 @@
 {
   "name": "@twoojoo/waffle",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "build": "tsc"
   },
-  "keywords": [],
+  "keywords": [
+    "fastify",
+    "rest",
+    "HTTP",
+    "wrapper",
+    "server",
+    "waffle",
+    "web",
+    "framework",
+    "api"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
