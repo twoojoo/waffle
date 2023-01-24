@@ -146,11 +146,11 @@
 
         server.version(1)<br>
         &emsp;&emsp;&emsp;.prefix("users")<br>
-        &emsp;&emsp;&emsp;.get(":id").handler(async (req, rep) => rep.send({ id: req.params.id }))<br><br>
+        &emsp;&emsp;&emsp;.GET(":id").handler(async (req, rep) => rep.send({ id: req.params.id }))<br><br>
 
         server.version(2)<br>
         &emsp;&emsp;&emsp;.prefix("customers")<br>
-        &emsp;&emsp;&emsp;.get(":id").handler(async (req, rep) => rep.send({ id: req.params.id }))<br><br>
+        &emsp;&emsp;&emsp;.GET(":id").handler(async (req, rep) => rep.send({ id: req.params.id }))<br><br>
 
         server.address("localhost", 3001)<br>
         &emsp;&emsp;&emsp;.listen()<br>
