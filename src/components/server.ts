@@ -1,4 +1,4 @@
-import type { FastifyServerOptions, FastifyInstance } from 'fastify'
+import type { FastifyServerOptions, FastifyInstance, RouteShorthandMethod, RouteShorthandOptions, RouteHandlerMethod, RouteOptions } from 'fastify'
 import { Version, versionFactory } from './version'
 import { Address, addressFactory } from './address'
 import { Limiter, limiterFactory } from './limiter'
@@ -7,6 +7,7 @@ import { Prefix, prefixFactory } from './prefix'
 import { Methods, methodsFactory } from './routes'
 import { Hooks, hooksFactory } from './hooks'
 import Fastify from 'fastify'
+import { FastifyRateLimitOptions } from '@fastify/rate-limit'
 
 export type ServerContext = {
   fastify: FastifyInstance,
@@ -14,9 +15,11 @@ export type ServerContext = {
   port: number
   version: number | undefined,
   prefix: string | undefined,
+  routes: RouteOptions[]
+  limiterOptions?: FastifyRateLimitOptions
 }
 
-export type Server = Methods & Listen & Address & Version & Prefix & Hooks & Limiter & {fastify: FastifyInstance}
+export type Server = Methods & Listen & Address & Version & Prefix & Hooks & Limiter & { fastify: FastifyInstance }
 
 export function Waffle(options?: FastifyServerOptions): Server {
   const serverCtx = defaultContext(options)
@@ -29,7 +32,8 @@ function defaultContext(options: FastifyServerOptions = {}): ServerContext {
     host: "0.0.0.0",
     port: 80,
     version: undefined,
-    prefix: undefined
+    prefix: undefined,
+    routes: []
   }
 }
 

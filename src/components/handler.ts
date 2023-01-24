@@ -22,16 +22,16 @@ export function handlerFactory<RouteTypes extends RouteGenericInterface>(serverC
         path = "/v" + serverCtx.version + path
       }
 
-      const options: RouteOptions = {
+      serverCtx.routes.push({
         ...(routeCtx.hooks || {}),
         method: routeCtx.method,
         url: path,
         handler: handler as RouteHandlerMethod,
         schema: {},
         config: { rateLimit: routeCtx.rateLimit }  
-      }
+      })
 
-      serverCtx.fastify.route(options)
+      // serverCtx.fastify.route(options)
       return serverFactory(serverCtx)
     }
   }

@@ -14,7 +14,8 @@ export type RouteLimiter<RouteTypes extends RouteGenericInterface> = {
 export function limiterFactory(serverCtx: ServerContext): Limiter {
   return {
     limiter(options: RateLimitOptions): Server {
-      serverCtx.fastify.register(import('@fastify/rate-limit'), options)
+      // serverCtx.fastify.register(import('@fastify/rate-limit'), options)
+      serverCtx.limiterOptions = options
       return serverFactory(serverCtx)
     }
   }
