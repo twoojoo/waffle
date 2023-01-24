@@ -31,7 +31,6 @@ export function handlerFactory<RouteTypes extends RouteGenericInterface>(serverC
         config: { rateLimit: routeCtx.rateLimit }  
       })
 
-      // serverCtx.fastify.route(options)
       return serverFactory(serverCtx)
     }
   }
