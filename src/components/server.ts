@@ -4,7 +4,7 @@ import { Address, addressFactory } from './address'
 import { Limiter, limiterFactory } from './limiter'
 import { Listen, listenFactory } from './listen'
 import { Prefix, prefixFactory } from './prefix'
-import { Routes, routesFactory } from './routes'
+import { Methods, methodsFactory } from './routes'
 import { Hooks, hooksFactory } from './hooks'
 import Fastify from 'fastify'
 
@@ -16,7 +16,7 @@ export type ServerContext = {
   prefix: string | undefined,
 }
 
-export type Server = Routes & Listen & Address & Version & Prefix & Hooks & Limiter & {fastify: FastifyInstance}
+export type Server = Methods & Listen & Address & Version & Prefix & Hooks & Limiter & {fastify: FastifyInstance}
 
 export function Waffle(options?: FastifyServerOptions): Server {
   const serverCtx = defaultContext(options)
@@ -36,7 +36,7 @@ function defaultContext(options: FastifyServerOptions = {}): ServerContext {
 export function serverFactory(serverCtx: ServerContext): Server {
   return {
     ...addressFactory(serverCtx),
-    ...routesFactory(serverCtx),
+    ...methodsFactory(serverCtx),
     ...listenFactory(serverCtx),
     ...versionFactory(serverCtx),
     ...prefixFactory(serverCtx),

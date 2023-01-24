@@ -6,7 +6,6 @@ export type Handler<RouteTypes extends RouteGenericInterface> = {
   handler: (handler: RouteHandlerMethod<RawServerDefault, RawRequestDefaultExpression, RawReplyDefaultExpression, RouteTypes>) => Server
 }
 
-
 export function handlerFactory<RouteTypes extends RouteGenericInterface>(serverCtx: ServerContext, routeCtx: RouteContext): Handler<RouteTypes> {
   return {
     handler(handler: RouteHandlerMethod<RawServerDefault, RawRequestDefaultExpression, RawReplyDefaultExpression, RouteTypes>) {
@@ -24,10 +23,12 @@ export function handlerFactory<RouteTypes extends RouteGenericInterface>(serverC
       }
 
       const options: RouteOptions = {
+        ...(routeCtx.hooks || {}),
         method: routeCtx.method,
         url: path,
         handler: handler as RouteHandlerMethod,
-        schema: {}
+        schema: {},
+        config: { rateLimit: routeCtx.rateLimit }  
       }
 
       serverCtx.fastify.route(options)
