@@ -17,7 +17,6 @@ export function listenFactory(serverCtx: ServerContext): Listen {
       if (!rateLimiterRegistered && routesUseRateLimter) serverCtx.limiterOptions = {}
 
       if (serverCtx.limiterOptions) {
-        console.log("with rate limiter")
         serverCtx.fastify.register(rateLimiter, serverCtx.limiterOptions).then(() => {
           serverCtx.routes.forEach(route => serverCtx.fastify.route(route))
           serverCtx.fastify.listen({ ...opts, host, port })
@@ -25,7 +24,7 @@ export function listenFactory(serverCtx: ServerContext): Listen {
             .catch(err => callback && callback(err, host + ":" + port))
         })
       } else {
-        console.log("without rate limiter")
+        serverCtx.routes.forEach(route => serverCtx.fastify.route(route))
         serverCtx.fastify.listen({ ...opts, host, port })
           .then(_ => callback && callback(null, host + ":" + port))
           .catch(err => callback && callback(err, host + ":" + port))

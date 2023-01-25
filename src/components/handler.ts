@@ -21,7 +21,7 @@ export function handlerFactory<RouteTypes extends RouteGenericInterface>(serverC
         if (!path.startsWith("/")) path = "/" + path
         path = "/v" + serverCtx.version + path
       }
-
+      
       serverCtx.routes.push({
         url: path,
         ...(routeCtx.hooks || {}),
