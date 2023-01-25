@@ -276,3 +276,17 @@ a {
 .code-block:hover .copy-code {
 	visibility: visible;
 }
+
+.code-hint {
+	border: 3px solid #D29A02;
+	padding: 1vw;
+	border-radius: 5px;
+	box-shadow: 5px 5px 4px #0f0f0f;
+	background: #0f0f0f;
+	transition: all .3s ease-in-out;
+	color: whitesmoke;
+}
+
+.code-hint:hover {
+	transform: scale(1.05);
+}
