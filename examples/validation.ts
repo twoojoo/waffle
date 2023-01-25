@@ -21,9 +21,9 @@ const bodySchema = {
 
 const queryStringSchema = {
 	type: 'object',
-	required: ['requiredKey'],
+	required: ['myRequiredKey'],
 	properties: {
-		name: { type: 'string' }
+		myRequiredKey: { type: 'string' }
 	}
 }
 
@@ -47,3 +47,5 @@ server.version(1)
 
 server.listen()
 
+//CURL 
+//curl -X PUT http://localhost:3000/v1/users/1?myRequiredKey=foo -d '{"name":"Bob"}' -H "Content-Type: application/json" -H 'myRequiredHeader:myHeaderValue'
