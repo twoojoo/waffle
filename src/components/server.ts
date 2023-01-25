@@ -1,4 +1,4 @@
-import type { FastifyServerOptions, FastifyInstance, RouteShorthandMethod, RouteShorthandOptions, RouteHandlerMethod, RouteOptions } from 'fastify'
+import type { FastifyServerOptions, FastifyInstance, RouteOptions } from 'fastify'
 import { Version, versionFactory } from './version'
 import { Address, addressFactory } from './address'
 import { Limiter, limiterFactory } from './limiter'
