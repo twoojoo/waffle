@@ -3,7 +3,7 @@ import { Route, routeFactory, RouteContext } from './routes'
 import { Server, ServerContext, serverFactory } from './server'
 
 export type ResponseSchema = {
-  [statusCode: number]: any
+  [statusCode: string | number]: any
 }
 
 export type RouteValidation<RouteTypes extends RouteGenericInterface> = {
