@@ -130,6 +130,8 @@
             style="text-decoration: underline;" target="_blank">hooks</a><br>available</div>
         <div class="code-description">Built-in <a href="https://github.com/fastify/fastify-rate-limit#options"
             style="text-decoration: underline;" target="_blank">rate<br>limiter</a></div>
+        <div class="code-description"><a>Route-specific</a> limters and hooks</div>
+        <div class="code-description">Everything you declare between the HTTP method and the handler is route-specific</div>
       </div>
       <code class="code-block prettyprint">
         <!-- <div class="copy-code prevent-select">&#x2398</div> -->
@@ -142,7 +144,7 @@
         &emsp;&emsp;&emsp;.preHandler(async (req, rep) => console.log("4) pre handler hook"))<br>
         &emsp;&emsp;&emsp;.preSerialization(async (req, rep) => console.log("5) pre serialization hook"))<br>
         &emsp;&emsp;&emsp;.onSend(async (req, rep) => console.log("6) on send hook"))<br>
-        &emsp;&emsp;&emsp;.limiter({max: 200, timeWindow: 60*1000}) <br><br>
+        &emsp;&emsp;&emsp;.limiter({max: 200, timeWindow: 60*1000}) //max 200 request per minute globally<br><br>
 
         server.version(1)<br>
         &emsp;&emsp;&emsp;.prefix("users")<br>
@@ -150,7 +152,10 @@
 
         server.version(2)<br>
         &emsp;&emsp;&emsp;.prefix("customers")<br>
-        &emsp;&emsp;&emsp;.GET(":id").handler(async (req, rep) => rep.send({ id: req.params.id }))<br><br>
+        &emsp;&emsp;&emsp;.GET(":id")
+        &emsp;&emsp;&emsp;.onRequest(async (req, rep) => console.log("1) on request route hook"))<br>
+        &emsp;&emsp;&emsp;.limiter({max: 2, timeWindow: 60*1000}) //max 2 requests per minute (route-only) <br>
+        &emsp;&emsp;&emsp;.handler(async (req, rep) => rep.send({ id: req.params.id }))<br><br>
 
         server.address("localhost", 3001)<br>
         &emsp;&emsp;&emsp;.listen()<br>
