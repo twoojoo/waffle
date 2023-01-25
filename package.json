@@ -1,6 +1,6 @@
 {
   "name": "@twoojoo/waffle",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A Fastify wrapper that makse HTTP servers stupidly easy",
   "url": "https://twoojoo.github.io/waffle/",
   "repository": "https://github.com/twoojoo/waffle",
