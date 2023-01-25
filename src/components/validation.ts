@@ -2,11 +2,16 @@ import { RouteGenericInterface } from 'fastify'
 import { Route, routeFactory, RouteContext } from './routes'
 import { Server, ServerContext, serverFactory } from './server'
 
+export type ResponseSchema = {
+  [statusCode: number]: any
+}
+
 export type RouteValidation<RouteTypes extends RouteGenericInterface> = {
   bodySchema: (schema: any) => Route<RouteTypes>,
   paramsSchema: (schema: any) => Route<RouteTypes>,
   querySchema: (schema: any) => Route<RouteTypes>,
   headersSchema: (schema: any) => Route<RouteTypes>
+  responseSchema: (schema: ResponseSchema) => Route<RouteTypes>
 }
 
 export function routeValidationFactory<RouteTypes extends RouteGenericInterface>(serverCtx: ServerContext, routeCtx: RouteContext): RouteValidation<RouteTypes> {
@@ -26,6 +31,10 @@ export function routeValidationFactory<RouteTypes extends RouteGenericInterface>
     headersSchema(schema: any): Route<RouteTypes> {
       routeCtx.schema.headers = schema    
       return routeFactory(serverCtx, routeCtx)
-    }
+    },
+    responseSchema(schema: ResponseSchema): Route<RouteTypes> {
+      routeCtx.schema.response = schema    
+      return routeFactory(serverCtx, routeCtx)
+    },
   }
 }

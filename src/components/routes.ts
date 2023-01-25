@@ -4,7 +4,7 @@ import type { ServerContext } from './server'
 import { HookCallback, HookWithPayloadCallback, OnErrorHookCallback, RouteHooks, routeHooksFactory } from './hooks'
 import { RouteLimiter, routeLimiterFactory } from './limiter'
 import { RateLimitOptions } from '@fastify/rate-limit'
-import { RouteValidation, routeValidationFactory } from './validation'
+import { ResponseSchema, RouteValidation, routeValidationFactory } from './validation'
 
 type Method = <RouteTypes extends RouteGenericInterface = DefaultRouteTypes>(path?: string) => Route<RouteTypes>
 
@@ -40,7 +40,8 @@ export type RouteContext = {
     body?: any,
     querystring?: any,
     params?: any,
-    headers?: any
+    headers?: any,
+    response?: ResponseSchema
   }
   rateLimit?: RateLimitOptions
 }
