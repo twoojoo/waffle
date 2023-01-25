@@ -152,7 +152,7 @@
 
         server.version(2)<br>
         &emsp;&emsp;&emsp;.prefix("customers")<br>
-        &emsp;&emsp;&emsp;.GET(":id")
+        &emsp;&emsp;&emsp;.GET(":id")<br>
         &emsp;&emsp;&emsp;.onRequest(async (req, rep) => console.log("1) on request route hook"))<br>
         &emsp;&emsp;&emsp;.limiter({max: 2, timeWindow: 60*1000}) //max 2 requests per minute (route-only) <br>
         &emsp;&emsp;&emsp;.handler(async (req, rep) => rep.send({ id: req.params.id }))<br><br>
