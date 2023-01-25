@@ -1,4 +1,4 @@
-import type { RouteOptions, RouteGenericInterface, RouteHandlerMethod, RawServerDefault, RawRequestDefaultExpression, RawReplyDefaultExpression } from 'fastify'
+import type { RouteGenericInterface, RouteHandlerMethod, RawServerDefault, RawRequestDefaultExpression, RawReplyDefaultExpression } from 'fastify'
 import { Server, ServerContext, serverFactory } from './server'
 import type { RouteContext } from './routes'
 
@@ -23,12 +23,12 @@ export function handlerFactory<RouteTypes extends RouteGenericInterface>(serverC
       }
 
       serverCtx.routes.push({
+        url: path,
         ...(routeCtx.hooks || {}),
         method: routeCtx.method,
-        url: path,
+        schema: routeCtx.schema,
+        config: { rateLimit: routeCtx.rateLimit },
         handler: handler as RouteHandlerMethod,
-        schema: {},
-        config: { rateLimit: routeCtx.rateLimit }  
       })
 
       return serverFactory(serverCtx)
