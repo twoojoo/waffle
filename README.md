@@ -1,4 +1,4 @@
-# Waffle - A Fastify wrapper that makes HTTP servers stupidly easy
+# Waffle - A fluent Fastify wrapper that makes HTTP servers stupidly easy
 
 ## Install
 

@@ -1,7 +1,7 @@
 {
   "name": "@twoojoo/waffle",
   "version": "0.0.13",
-  "description": "A Fastify wrapper that makse HTTP servers stupidly easy",
+  "description": "A fluent Fastify wrapper that makse HTTP servers stupidly easy",
   "url": "https://twoojoo.github.io/waffle/",
   "homepage": "https://twoojoo.github.io/waffle/",
   "repository": "https://github.com/twoojoo/waffle",
@@ -12,6 +12,8 @@
   },
   "keywords": [
     "fastify",
+    "fluent",
+    "chaining",
     "rest",
     "HTTP",
     "wrapper",
