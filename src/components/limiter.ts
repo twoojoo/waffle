@@ -1,7 +1,9 @@
 import { Server, ServerContext, serverFactory } from './server'
 import type { RateLimitOptions } from '@fastify/rate-limit'
+export {RateLimitOptions} from '@fastify/rate-limit'
 import { RouteGenericInterface } from 'fastify'
 import { Route, RouteContext, routeFactory } from './routes'
+
 
 export type Limiter = {
   limiter: (options: RateLimitOptions) => Server

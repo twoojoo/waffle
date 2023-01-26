@@ -19,7 +19,7 @@ export type Methods = {
 export type Route<RouteTypes extends RouteGenericInterface> = 
   RouteHooks<RouteTypes> & 
   RouteLimiter<RouteTypes> & 
-  Handler<RouteTypes>  &
+  Handler<RouteTypes> &
   RouteValidation<RouteTypes>
 
 export type RouteContext = {
