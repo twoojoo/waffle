@@ -35,7 +35,7 @@ function getOffset(el) {
 	};
 }
 
-var string = "A Fastify wrapper that makes HTTP servers stupidly easy."
+var string = "A fluent Fastify wrapper that makes HTTP servers stupidly easy."
 
 // var string = "CodeHim is one of the BEST developer websites that provide web designers and developers with a simple way to preview and download a variety of free code & scripts.";
 var str = string.split("");

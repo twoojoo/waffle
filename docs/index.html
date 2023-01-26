@@ -37,7 +37,8 @@
           <div id="main-title-container">
             <div id="main-title" class="main-title prevent-select">Waffle</div>
             <div id="main-subtitle" class="main-title prevent-select css-typing"></div>
-            <div id="subtitle-fill" class="main-title">A Fastify wrapper that makes HTTP servers stupidly easy.</div>
+            <div id="subtitle-fill" class="main-title">---------------------------------------------------------------</div>
+                                                       <!-- A fluent Fastify wrapper that makes HTTP servers stupidly easy.</div> -->
           </div>
         </a>
     </div>
@@ -162,18 +163,107 @@
       </code>
     </div>
 
+    <div class="code-sample" id="installation">
+      <code class="code-block prettyprint">
+        <!-- <div class="copy-code prevent-select">&#x2398</div> -->
+        import { Waffle } from "@twoojoo/waffle"<br><br>
+
+const server = Waffle()<br>
+  &emsp;&emsp;&emsp;.address("localhost", 3000)<br><br>
+
+const paramsSchema = {<br>
+  &emsp;&emsp;&emsp;type: 'object',<br>
+  &emsp;&emsp;&emsp;required: ['id'],<br>
+  &emsp;&emsp;&emsp;properties: {<br>
+  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;id: { type: 'number' }<br>
+  &emsp;&emsp;&emsp;}<br>
+}<br><br>
+
+const bodySchema = {<br>
+&emsp;&emsp;&emsp;type: 'object',<br>
+&emsp;&emsp;&emsp;required: ['name'],<br>
+&emsp;&emsp;&emsp;properties: {<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;name: { type: 'string' }<br>
+&emsp;&emsp;&emsp;}<br>
+}<br><br>
+
+const queryStringSchema = {<br>
+&emsp;&emsp;&emsp;type: 'object',<br>
+&emsp;&emsp;&emsp;required: ['key'],<br>
+&emsp;&emsp;&emsp;properties: {<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;key: { type: 'string' }<br>
+&emsp;&emsp;&emsp;}<br>
+}<br><br>
+
+const headersSchema = {<br>
+&emsp;&emsp;&emsp;type: 'object',<br>
+&emsp;&emsp;&emsp;required: ['myRequiredHeader'],<br>
+&emsp;&emsp;&emsp;properties: {<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;myRequiredHeader: { const: 'myHeaderValue' }<br>
+&emsp;&emsp;&emsp;}<br>
+}<br><br>
+
+const responseSchema = {<br>
+&emsp;&emsp;&emsp;200: { type: 'string' }<br>
+}<br><br>
+
+server.version(1)<br>
+&emsp;&emsp;&emsp;.prefix("users")<br><br>
+
+&emsp;&emsp;&emsp;.PUT(":id")<br>
+&emsp;&emsp;&emsp;.paramsSchema(paramsSchema)<br>
+&emsp;&emsp;&emsp;.bodySchema(bodySchema)<br>
+&emsp;&emsp;&emsp;.querySchema(queryStringSchema)<br>
+&emsp;&emsp;&emsp;.headersSchema(headersSchema)<br>
+&emsp;&emsp;&emsp;.responseSchema(responseSchema)<br>
+&emsp;&emsp;&emsp;.handler(async (_, rep) => rep.send("all schemas are OK"))<br><br>
+
+server.listen({}, (err, addr) => {<br>
+&emsp;&emsp;&emsp;if (err) console.error(err)<br>
+&emsp;&emsp;&emsp;else console.log(`server listening at`, addr)<br>
+})<br><br>
+
+      </code>
+      <div class="code-text" align="left">
+        <div class="code-title  prevent-select" align="left">
+          Validation
+        </div>
+        <div class="code-description  prevent-select">Use JSON schema to <a href="https://www.fastify.io/docs/latest/Reference/Validation-and-Serialization/"
+            style="text-decoration: underline;" target="_blank">validate</a><br>all route components (body,<br>params, query string and<br> headers)</div>
+        <div class="code-description code-hint"><text class="prevent-select"><a>☀</a> CURL request that will pass<br>the validation:<br></text><br><a>curl -X PUT \<br>http://localhost:3000/v1/users/1?key=foo \<br>-d '{"name":"Bob"}' \<br>-H "Content-Type: application/json" \<br>-H 'myRequiredHeader:myHeaderValue'</a></div>
+        <div class="code-description  prevent-select">Keep in mind that you can use<br><a href="https://www.fastify.io/docs/latest/Guides/Fluent-Schema/"
+            style="text-decoration: underline;" target="_blank">Fluent Schema</a> as suggested in the<br>Fastify docs</div>
+        <div class="code-description  prevent-select">You can also parse your schemas<br> to Typescript types with<a href="https://www.fastify.io/docs/latest/Reference/TypeScript/#json-schema-to-ts" style="text-decoration: underline;" target="_blank"><br>json-schema-to-ts</a> package to use<br>them with route generics:</div>
+        <code class="code-block prettyprint">
+import { FromSchema } <br>&emsp;&emsp;&emsp;from "json-schema-to-ts";<br><br>
+//....<br><br>
+const bodySchema = {<br>
+&emsp;&emsp;&emsp;type: 'object',<br>
+&emsp;&emsp;&emsp;required: ['name'],<br>
+&emsp;&emsp;&emsp;properties: {<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;name: { type: 'string' }<br>
+&emsp;&emsp;&emsp;}<br>
+} as const<br><br>
+type RouteTypes = {<br>&emsp;&emsp;&emsp;Body: FromSchema&lt;typeof bodySchema&gt;<br>}<br><br>
+server.PUT&lt;RouteTypes&gt;("/path")<br>
+&emsp;&emsp;&emsp;.handler(async (_, rep) => {<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;rep.send("ok")<br>&emsp;&emsp;&emsp;})<br><br>
+//....<br><br>
+        </code>
+      </div>
+    </div>
+
     <div class="code-sample" id="ping">
+      <div class="code-text prevent-select" align="right">
+        <div class="code-title">Need a missing feature?</div>
+        <div class="code-description">Waffle isn't gelous and<br>lets you manipulate the<br>underlying Fastify<br>instance</div>
+      </div>
       <code class="code-block prettyprint">
         <!-- <div class="copy-code prevent-select">&#x2398</div> -->
         import { Waffle } from "@twoojoo/waffle"<br><br>
         const server = Waffle().address("localhost", 3000)<br><br>
-        server.fastify.register(/*------*/)<br><br>
+        server.fastify.register(/*--custom-logic--*/)<br><br>
         server.listen()
       </code>
-      <div class="code-text prevent-select" align="left">
-        <div class="code-title">Need a missing feature?</div>
-        <div class="code-description">Waffle isn't gelous and<br>lets you manipulate the<br>underlying Fastify<br>instance</div>
-      </div>
     </div>
 
       <div class="code-sample" id="next">
@@ -181,7 +271,7 @@
         <div class="code-title" align="center">
           Next steps
         </div>
-        <div class="code-description" align="center">Data <a>validation</a> (?? implicit if using generics ??)</a></div>
+        <div class="code-description" align="center">Support to all HTTP methods</div>
         <!-- <div class="code-description" align="center"><a>Routes-specific</a> hooks and limiters</a></div> -->
       </div>
     </div>

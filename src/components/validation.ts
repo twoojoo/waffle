@@ -1,6 +1,7 @@
 import { RouteGenericInterface } from 'fastify'
 import { Route, routeFactory, RouteContext } from './routes'
 import { Server, ServerContext, serverFactory } from './server'
+import { FromSchema } from "json-schema-to-ts"
 
 export type ResponseSchema = {
   [statusCode: string | number]: any

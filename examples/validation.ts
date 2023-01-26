@@ -9,7 +9,7 @@ const paramsSchema = {
 	properties: {
 		id: { type: 'number' }
 	}
-}
+} as const
 
 const bodySchema = {
 	type: 'object',
@@ -17,7 +17,7 @@ const bodySchema = {
 	properties: {
 		name: { type: 'string' }
 	}
-}
+} as const
 
 const queryStringSchema = {
 	type: 'object',
@@ -25,7 +25,7 @@ const queryStringSchema = {
 	properties: {
 		myRequiredKey: { type: 'string' }
 	}
-}
+} as const
 
 const headersSchema = {
 	type: 'object',
@@ -33,11 +33,11 @@ const headersSchema = {
 	properties: {
 		myRequiredHeader: { const: 'myHeaderValue' }
 	}
-}
+} as const
 
 const responseSchema = {
 	200: { type: 'string' }
-}
+} as const
 
 server.version(1)
 	.prefix("users")
