@@ -9,9 +9,3 @@ npm i @twoojoo/waffle
 ## Documentation
 
 Vistit the [Waffle Website](https://twoojoo.github.io/waffle/).
-
-## Todo
-
-- validation
-- route-specific hooks
-
