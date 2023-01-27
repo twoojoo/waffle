@@ -1,41 +1,41 @@
 import { RouteGenericInterface } from 'fastify'
 import { Route, routeFactory, RouteContext } from './routes'
-import { Server, ServerContext, serverFactory } from './server'
-import { FromSchema, JSONSchema7, asConst} from "json-schema-to-ts"
+import { ServerContext } from './server'
+import { FromSchema, JSONSchema7, JSONSchema } from "json-schema-to-ts"
 
 export type ResponseSchema = {
   [statusCode: string | number]: any
 }
 
 export type RouteValidation<RouteTypes extends RouteGenericInterface> = {
-  bodySchema: <S extends JSONSchema7, T = FromSchema<S>>(schema: S) => Route<RouteTypes & { Body: T }>
-  paramsSchema: <S extends JSONSchema7, T = FromSchema<S>>(schema: S) => Route<RouteTypes & { Params: T }>
-  querySchema: <S extends JSONSchema7, T = FromSchema<S>>(schema: S) => Route<RouteTypes & { Querystring: T }>
-  headersSchema: <S extends JSONSchema7, T = FromSchema<S>>(schema: S) => Route<RouteTypes & { Headers: T }>
-  responseSchema: (schema: any) => Route<RouteTypes>
+  bodySchema: <S extends (JSONSchema7 | JSONSchema), T = FromSchema<S>>(schema: S) => Route<Omit<RouteTypes, 'Body'> & { Body: T }>
+  paramsSchema: <S extends (JSONSchema7 | JSONSchema), T = FromSchema<S>>(schema: S) => Route<Omit<RouteTypes, 'Params'> & { Params: T }>
+  querySchema: <S extends (JSONSchema7 | JSONSchema), T = FromSchema<S>>(schema: S) => Route<Omit<RouteTypes, 'Querystring'> & { Querystring: T }>
+  headersSchema: <S extends (JSONSchema7 | JSONSchema), T = FromSchema<S>>(schema: S) => Route<Omit<RouteTypes, 'Headers'> & { Headers: T }>
+  responseSchema: <S extends (JSONSchema7 | JSONSchema), T = FromSchema<S>>(schema: S) => Route<Omit<RouteTypes, 'Reply'> & { Reply: T }>
 }
 
 export function routeValidationFactory<RouteTypes extends RouteGenericInterface>(serverCtx: ServerContext, routeCtx: RouteContext): RouteValidation<RouteTypes> {
   return {
-    bodySchema<S extends JSONSchema7, T = FromSchema<S>>(schema: S): Route<RouteTypes  & { Body: T }> {
+    bodySchema<S extends (JSONSchema7 | JSONSchema), T = FromSchema<S>>(schema: S): Route<Omit<RouteTypes, 'Body'> & { Body: T }> {
       routeCtx.schema.body = schema           
-      return routeFactory<RouteTypes & { Body: T }>(serverCtx, routeCtx)
+      return routeFactory<Omit<RouteTypes, 'Body'> & { Body: T }>(serverCtx, routeCtx)
     },
-    paramsSchema<S extends JSONSchema7, T = FromSchema<S>>(schema: S): Route<RouteTypes  & { Params: T }> {
+    paramsSchema<S extends (JSONSchema7 | JSONSchema), T = FromSchema<S>>(schema: S): Route<Omit<RouteTypes, 'Params'> & { Params: T }> {
       routeCtx.schema.params = schema      
-      return routeFactory<RouteTypes & { Params: T }>(serverCtx, routeCtx)
+      return routeFactory<Omit<RouteTypes, 'Params'> & { Params: T }>(serverCtx, routeCtx)
     },
-    querySchema<S extends JSONSchema7, T = FromSchema<S>>(schema: S): Route<RouteTypes  & { Querystring: T }> {
+    querySchema<S extends (JSONSchema7 | JSONSchema), T = FromSchema<S>>(schema: S): Route<Omit<RouteTypes, 'Querystring'> & { Querystring: T }> {
       routeCtx.schema.querystring = schema   
-      return routeFactory<RouteTypes & { Querystring: T }>(serverCtx, routeCtx)
+      return routeFactory<Omit<RouteTypes, 'Querystring'> & { Querystring: T }>(serverCtx, routeCtx)
     },
-    headersSchema<S extends JSONSchema7, T = FromSchema<S>>(schema: S): Route<RouteTypes  & { Headers: T }> {
+    headersSchema<S extends (JSONSchema7 | JSONSchema), T = FromSchema<S>>(schema: S): Route<Omit<RouteTypes, 'Headers'> & { Headers: T }> {
       routeCtx.schema.headers = schema   
-      return routeFactory<RouteTypes & { Headers: T }>(serverCtx, routeCtx)
+      return routeFactory<Omit<RouteTypes, 'Headers'> & { Headers: T }>(serverCtx, routeCtx)
     },
-    responseSchema(schema: any): Route<RouteTypes> {
+    responseSchema<S extends (JSONSchema7 | JSONSchema), T = FromSchema<S>>(schema: S): Route<Omit<RouteTypes, 'Reply'> & { Reply: T }> {
       routeCtx.schema.response = schema as ResponseSchema
-      return routeFactory<RouteTypes>(serverCtx, routeCtx)
+      return routeFactory<Omit<RouteTypes, 'Reply'> & { Reply: T }>(serverCtx, routeCtx)
     },
   }
 }

@@ -49,7 +49,8 @@ server.version(1)
 	.headersSchema(headersSchema)
 	.responseSchema(responseSchema)
 	.handler(async (req, rep) => {
-		req.body
+		console.log(req.body)
+		console.log(req.params.id)
 		rep.send("all schemas are OK")
 	})
 
