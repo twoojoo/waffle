@@ -118,7 +118,7 @@
       <div class="code-text prevent-select" align="left" style="justify-content: start; gap: 3vh; padding: 3vh;">
         <div class="code-title">Rest API</div>
         <div class="code-description">CRUD operations at<br>localhost:3000/v1/users</div>
-        <div class="code-description">Define Body, Params,<br>Query and Reply types<br>as <a href="https://www.fastify.io/docs/latest/Reference/TypeScript/#using-generics" style="text-decoration: underline;" target="_blank">generics</a></div>
+        <div class="code-description">Define Body, Params,<br>Query and Reply types<br>as <a href="https://www.fastify.io/docs/latest/Reference/TypeScript/#using-generics" style="text-decoration: underline;" target="_blank">generics</a> (automatically<br>provided when schemas are<br>used - see below)</div>
         <div class="code-description">Easily set API <a>version</a><br>and routes <a>prefixes</a></div>
         <div class="code-description code-hint"><a>☀</a>  Functions chaining allows<br>for a declarative and dynamic<br>developing approach (code<br>suggestion will be your <br>best friend)</div>
       </div>
@@ -233,9 +233,11 @@ server.listen({}, (err, addr) => {<br>
         <div class="code-description code-hint"><text class="prevent-select"><a>☀</a> CURL request that will pass<br>the validation:<br></text><br><a>curl -X PUT \<br>http://localhost:3000/v1/users/1?key=foo \<br>-d '{"name":"Bob"}' \<br>-H "Content-Type: application/json" \<br>-H 'myRequiredHeader:myHeaderValue'</a></div>
         <div class="code-description  prevent-select">Keep in mind that you can use<br><a href="https://www.fastify.io/docs/latest/Guides/Fluent-Schema/"
             style="text-decoration: underline;" target="_blank">Fluent Schema</a> as suggested in the<br>Fastify docs</div>
-        <div class="code-description  prevent-select">You can also parse your schemas<br> to Typescript types with<a href="https://www.fastify.io/docs/latest/Reference/TypeScript/#json-schema-to-ts" style="text-decoration: underline;" target="_blank"><br>json-schema-to-ts</a> package to use<br>them with route generics:</div>
-        <code class="code-block prettyprint">
-import { FromSchema } <br>&emsp;&emsp;&emsp;from "json-schema-to-ts";<br><br>
+            <div class="code-title  prevent-select" align="left" style="margin-top: 8vh;">
+          Automatic Types!
+        </div>
+        <div class="code-description code-hint prevent-select"><a>☀</a> Waffle automatically parses<br>your schemas into <a>Typescript types</a><br>as if you were using generics:<br><br>
+        <code class="code-block prettyprint" style="width: 82%;">
 //....<br><br>
 const bodySchema = {<br>
 &emsp;&emsp;&emsp;type: 'object',<br>
@@ -243,12 +245,16 @@ const bodySchema = {<br>
 &emsp;&emsp;&emsp;properties: {<br>
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;name: { type: 'string' }<br>
 &emsp;&emsp;&emsp;}<br>
-} as const<br><br>
-type RouteTypes = {<br>&emsp;&emsp;&emsp;Body: FromSchema&lt;typeof bodySchema&gt;<br>}<br><br>
-server.PUT&lt;RouteTypes&gt;("/path")<br>
-&emsp;&emsp;&emsp;.handler(async (_, rep) => {<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;rep.send("ok")<br>&emsp;&emsp;&emsp;})<br><br>
-//....<br><br>
-        </code>
+} as const //important<br><br>
+server.PUT("/path")<br>
+&emsp;&emsp;&emsp;.bodySchema(bodySchema)<br>
+&emsp;&emsp;&emsp;.handler(async (_, rep) => {<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//autocompletion works here<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;console.log(req.body.name)<br> 
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;rep.send("ok")<br>
+&emsp;&emsp;&emsp;})<br><br>
+//....<br>
+        </code></div>
       </div>
     </div>
 
