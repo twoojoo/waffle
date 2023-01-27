@@ -4,7 +4,7 @@ import { ServerContext } from './server'
 import { FromSchema, JSONSchema7, JSONSchema } from "json-schema-to-ts"
 
 export type ResponseSchema = {
-  [statusCode: string | number]: any
+  [statusCode: string | number]: (JSONSchema7 | JSONSchema)
 }
 
 export type RouteValidation<RouteTypes extends RouteGenericInterface> = {
@@ -12,7 +12,7 @@ export type RouteValidation<RouteTypes extends RouteGenericInterface> = {
   paramsSchema: <S extends (JSONSchema7 | JSONSchema), T = FromSchema<S>>(schema: S) => Route<Omit<RouteTypes, 'Params'> & { Params: T }>
   querySchema: <S extends (JSONSchema7 | JSONSchema), T = FromSchema<S>>(schema: S) => Route<Omit<RouteTypes, 'Querystring'> & { Querystring: T }>
   headersSchema: <S extends (JSONSchema7 | JSONSchema), T = FromSchema<S>>(schema: S) => Route<Omit<RouteTypes, 'Headers'> & { Headers: T }>
-  responseSchema: <S extends (JSONSchema7 | JSONSchema), T = FromSchema<S>>(schema: S) => Route<Omit<RouteTypes, 'Reply'> & { Reply: T }>
+  responseSchema: (schema: ResponseSchema) => Route<RouteTypes>
 }
 
 export function routeValidationFactory<RouteTypes extends RouteGenericInterface>(serverCtx: ServerContext, routeCtx: RouteContext): RouteValidation<RouteTypes> {
@@ -33,9 +33,9 @@ export function routeValidationFactory<RouteTypes extends RouteGenericInterface>
       routeCtx.schema.headers = schema   
       return routeFactory<Omit<RouteTypes, 'Headers'> & { Headers: T }>(serverCtx, routeCtx)
     },
-    responseSchema<S extends (JSONSchema7 | JSONSchema), T = FromSchema<S>>(schema: S): Route<Omit<RouteTypes, 'Reply'> & { Reply: T }> {
-      routeCtx.schema.response = schema as ResponseSchema
-      return routeFactory<Omit<RouteTypes, 'Reply'> & { Reply: T }>(serverCtx, routeCtx)
-    },
+    responseSchema(schema: ResponseSchema): Route<RouteTypes> {
+      routeCtx.schema.response = schema
+      return routeFactory<RouteTypes>(serverCtx, routeCtx)
+    }
   }
 }

@@ -51,7 +51,7 @@ server.version(1)
 	.handler(async (req, rep) => {
 		console.log(req.body)
 		console.log(req.params.id)
-		rep.send("all schemas are OK")
+		rep.send()
 	})
 
 server.listen({}, (err, addr) => {
