@@ -48,7 +48,10 @@ server.version(1)
 	.querySchema(queryStringSchema)
 	.headersSchema(headersSchema)
 	.responseSchema(responseSchema)
-	.handler(async (_, rep) => rep.send("all schemas are OK"))
+	.handler(async (req, rep) => {
+		req.body
+		rep.send("all schemas are OK")
+	})
 
 server.listen({}, (err, addr) => {
 	if (err) console.error(err)
