@@ -2,6 +2,7 @@ import type { FastifyPluginCallback, FastifyRegisterOptions } from 'fastify'
 import { Server, ServerContext, serverFactory } from './server'
 
 export type Plugin = {
+  /**Wrapper of fastify instance' "register" method*/
   plugin: (plugin: FastifyPluginCallback, opts: FastifyRegisterOptions<any>) => Server
 }
 

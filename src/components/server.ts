@@ -5,22 +5,27 @@ import { Limiter, limiterFactory } from './limiter'
 import { Listen, listenFactory } from './listen'
 import { Prefix, prefixFactory } from './prefix'
 import { Methods, methodsFactory } from './routes'
-import { Hooks, hooksFactory } from './hooks'
+import { Hooks, HooksCallbacks, hooksFactory } from './hooks'
 import Fastify from 'fastify'
 import { FastifyRateLimitOptions } from '@fastify/rate-limit'
+
+export type WaffleRoute = RouteOptions & HooksCallbacks & { routeVersion: number | undefined, routePrefix: string | undefined }
 
 export type ServerContext = {
   fastify: FastifyInstance,
   host: string
   port: number
   version: number | undefined,
+  versionHooks: { [version: number]: HooksCallbacks },
+  prefixHooks: { [prefix: string]: HooksCallbacks },
   prefix: string | undefined,
-  routes: RouteOptions[]
+  routes: WaffleRoute[]
   limiterOptions?: FastifyRateLimitOptions
 }
 
 export type Server = Methods & Listen & Address & Version & Prefix & Hooks & Limiter & { fastify: FastifyInstance }
 
+/**Initalizes a Waffle server (uses FastifyServerOptions as argument)*/
 export function Waffle(options?: FastifyServerOptions): Server {
   const serverCtx = defaultContext(options)
   return serverFactory(serverCtx)
@@ -33,11 +38,14 @@ function defaultContext(options: FastifyServerOptions = {}): ServerContext {
     port: 80,
     version: undefined,
     prefix: undefined,
-    routes: []
+    routes: [],
+    versionHooks: {},
+    prefixHooks: {},
   }
 }
 
 export function serverFactory(serverCtx: ServerContext): Server {
+  console.log(serverCtx.version)
   return {
     ...addressFactory(serverCtx),
     ...methodsFactory(serverCtx),

@@ -1,7 +1,7 @@
 import { Handler, handlerFactory } from './handler'
 import { HTTPMethods, RouteGenericInterface } from "fastify"
 import type { ServerContext } from './server'
-import { HookCallback, HookWithPayloadCallback, OnErrorHookCallback, RouteHooks, routeHooksFactory } from './hooks'
+import { HooksCallbacks, initHooks, RouteHooks, routeHooksFactory } from './hooks'
 import { RouteLimiter, routeLimiterFactory } from './limiter'
 import { RateLimitOptions } from '@fastify/rate-limit'
 import { ResponseSchema, RouteValidation, routeValidationFactory } from './validation'
@@ -9,10 +9,15 @@ import { ResponseSchema, RouteValidation, routeValidationFactory } from './valid
 type Method = <RouteTypes extends RouteGenericInterface = DefaultRouteTypes>(path?: string) => Route<RouteTypes>
 
 export type Methods = {
+  /**Opens the route declaration scope of a GET route. Declaring the handler will close the route scope.*/
   GET: Method,
+  /**Opens the route declaration scope of a POST route. Declaring the handler will close the route scope.*/
   POST: Method,
+  /**Opens the route declaration scope of a PUT route. Declaring the handler will close the route scope.*/
   PUT: Method,
+  /**Opens the route declaration scope of a PATCH route. Declaring the handler will close the route scope.*/
   PATCH: Method,
+  /**Opens the route declaration scope of a DELETE route. Declaring the handler will close the route scope.*/
   DELETE: Method
 }
 
@@ -25,17 +30,7 @@ export type Route<RouteTypes extends RouteGenericInterface> =
 export type RouteContext = {
   method: HTTPMethods,
   path: string,
-  hooks: {
-    onRequest?: HookCallback
-    preParsing?: HookWithPayloadCallback
-    preValidation?: HookCallback
-    preHandler?: HookCallback
-    preSerialization?: HookWithPayloadCallback
-    onError?: OnErrorHookCallback
-    onSend?: HookWithPayloadCallback
-    onResponse?: HookCallback
-    onTimeout?: HookCallback
-  },
+  hooks: HooksCallbacks,
   schema: {
     body?: any,
     querystring?: any,
@@ -44,6 +39,12 @@ export type RouteContext = {
     response?: ResponseSchema
   }
   rateLimit?: RateLimitOptions
+  version?: number,
+  prefix?: string,
+}
+
+function initRouteCtx(method: HTTPMethods, path: string, serverCtx: ServerContext): RouteContext {
+  return { method, path, hooks: initHooks(), schema: {}, version: serverCtx.version, prefix: serverCtx.prefix }
 }
 
 export type DefaultRouteTypes = {
@@ -57,23 +58,23 @@ export type DefaultRouteTypes = {
 export function methodsFactory(serverCtx: ServerContext): Methods {
   return {
     GET<RouteTypes extends RouteGenericInterface = DefaultRouteTypes>(path: string = ""): Route<RouteTypes> {
-      const routeCtx: RouteContext = { method: "GET", path, hooks: {}, schema: {} }
+      const routeCtx: RouteContext = initRouteCtx("GET", path, serverCtx)
       return routeFactory<RouteTypes>(serverCtx, routeCtx) 
     },
     POST<RouteTypes extends RouteGenericInterface = DefaultRouteTypes>(path: string = ""): Route<RouteTypes> {
-      const routeCtx: RouteContext = { method: "POST", path, hooks: {}, schema: {} }
+      const routeCtx: RouteContext = initRouteCtx("POST", path, serverCtx)
       return routeFactory<RouteTypes>(serverCtx, routeCtx) 
     },
     PUT<RouteTypes extends RouteGenericInterface = DefaultRouteTypes>(path: string = ""): Route<RouteTypes> {
-      const routeCtx: RouteContext = { method: "PUT", path, hooks: {}, schema: {} }
+      const routeCtx: RouteContext = initRouteCtx("PUT", path, serverCtx)
       return routeFactory<RouteTypes>(serverCtx, routeCtx) 
     },
     PATCH<RouteTypes extends RouteGenericInterface = DefaultRouteTypes>(path: string = ""): Route<RouteTypes> {
-      const routeCtx: RouteContext = { method: "PATCH", path, hooks: {}, schema: {} }
+      const routeCtx: RouteContext = initRouteCtx("PATCH", path, serverCtx)
       return routeFactory<RouteTypes>(serverCtx, routeCtx) 
     },
     DELETE<RouteTypes extends RouteGenericInterface = DefaultRouteTypes>(path: string = ""): Route<RouteTypes> {
-      const routeCtx: RouteContext = { method: "DELETE", path, hooks: {}, schema: {} }
+      const routeCtx: RouteContext = initRouteCtx("DELETE", path, serverCtx)
       return routeFactory<RouteTypes>(serverCtx, routeCtx) 
     }
   }

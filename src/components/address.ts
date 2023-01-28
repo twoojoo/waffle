@@ -1,8 +1,11 @@
 import { Server, ServerContext, serverFactory } from './server'
 
 export type Address = {
+  /**Sets the host to listen on*/
   host: (host: string) => Server
+  /**Sets the port to listen on*/
   port: (port: number) => Server
+  /**Sets the host and port to listen on*/
   address: (host: string, port: number) => Server
 }
 
