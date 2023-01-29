@@ -6,7 +6,12 @@ import { Route, RouteContext, routeFactory } from './routes'
 
 
 export type Limiter = {
-  limiter: (options: FastifyRateLimitOptions) => Server
+  /**Sets rate limit options. Behaviour based on declaration scope:
+* @Server-wide accepts the "global: boolean" option. Ignores the "onExceeding" and "onExceeded" options
+* @Version-wide accepts the onExceeding and "onExceeded" options. Ignore the "global" option
+* @Prefix-wide accepts the onExceeding and "onExceeded" options. Ignore the "global" option
+* @Options-priority route > prefix > version > server */
+  limiter: (options: RateLimitOptions & FastifyRateLimitOptions) => Server
 }
 
 export type RouteLimiter<RouteTypes extends RouteGenericInterface> = {
@@ -15,7 +20,7 @@ export type RouteLimiter<RouteTypes extends RouteGenericInterface> = {
 
 export function limiterFactory(serverCtx: ServerContext): Limiter {
   return {
-    limiter(options: RateLimitOptions): Server {
+    limiter(options: RateLimitOptions & FastifyRateLimitOptions): Server {
       if (!serverCtx.limiterOptions) serverCtx.limiterOptions = {}
 
       if (serverCtx.prefix) {
