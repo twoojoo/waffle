@@ -1,7 +1,8 @@
 import type { FastifyListenOptions, RouteOptions } from 'fastify'
 import type { ServerContext, WaffleRoute } from './server'
 import rateLimiter from "@fastify/rate-limit"
-import { HooksCallbacks, initHooks } from './hooks'
+import { initHooks } from './hooks'
+import cors from "@fastify/cors" 
 
 export type Listen = {
   listen: (opts?: FastifyListenOptions, callback?: (err: any, addr: string) => any) => Promise<void>
@@ -11,6 +12,8 @@ export function listenFactory(serverCtx: ServerContext): Listen {
   return {
     async listen(opts: Omit<FastifyListenOptions, "port" | "host"> = {}, callback?: (err: any, addr: string) => any) {
       const { host, port } = serverCtx
+
+      if (serverCtx.cors) await serverCtx.fastify.register(cors, serverCtx.cors)
 
       const rateLimiterRegistered = !!serverCtx.limiterOptions //
       const routesUseRateLimter = !!serverCtx.routes.find(r => (r.config as any).rateLimit)

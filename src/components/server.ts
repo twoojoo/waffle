@@ -8,6 +8,9 @@ import { Methods, methodsFactory } from './routes'
 import { Hooks, HooksCallbacks, hooksFactory } from './hooks'
 import Fastify from 'fastify'
 import { FastifyRateLimitOptions, RateLimitHook, RateLimitOptions } from '@fastify/rate-limit'
+import { FastifyCorsOptions } from '@fastify/cors'
+import { Cors, corsFactory } from './cors'
+import { Plugin, pluginFactory } from './plugin'
 
 export type WaffleRoute = RouteOptions & HooksCallbacks & { routeVersion: number | undefined, routePrefix: string | undefined }
 
@@ -15,6 +18,7 @@ export type ServerContext = {
   fastify: FastifyInstance,
   host: string
   port: number
+  cors?: FastifyCorsOptions,
   version: number | undefined,
   versionHooks: { [version: number]: HooksCallbacks },
   versionLimiter: { [version: number]: RateLimitOptions },
@@ -25,7 +29,7 @@ export type ServerContext = {
   limiterOptions?: FastifyRateLimitOptions
 }
 
-export type Server = Methods & Listen & Address & Version & Prefix & Hooks & Limiter & { fastify: FastifyInstance }
+export type Server = Methods & Listen & Address & Version & Prefix & Hooks & Limiter & Cors & Plugin & { fastify: FastifyInstance }
 
 /**Initalizes a Waffle server (uses FastifyServerOptions as argument)*/
 export function Waffle(options?: FastifyServerOptions): Server {
@@ -56,6 +60,8 @@ export function serverFactory(serverCtx: ServerContext): Server {
     ...versionFactory(serverCtx),
     ...prefixFactory(serverCtx),
     ...hooksFactory(serverCtx),
+    ...pluginFactory(serverCtx),
+    ...corsFactory(serverCtx),
     ...limiterFactory(serverCtx),
     fastify: serverCtx.fastify
   } 
