@@ -1,12 +1,12 @@
 import { Server, ServerContext, serverFactory } from './server'
-import type { RateLimitOptions } from '@fastify/rate-limit'
-export {RateLimitOptions} from '@fastify/rate-limit'
+import type { FastifyRateLimitOptions, RateLimitOptions } from '@fastify/rate-limit'
+export { RateLimitOptions } from '@fastify/rate-limit'
 import { RouteGenericInterface } from 'fastify'
 import { Route, RouteContext, routeFactory } from './routes'
 
 
 export type Limiter = {
-  limiter: (options: RateLimitOptions) => Server
+  limiter: (options: FastifyRateLimitOptions) => Server
 }
 
 export type RouteLimiter<RouteTypes extends RouteGenericInterface> = {
@@ -16,7 +16,15 @@ export type RouteLimiter<RouteTypes extends RouteGenericInterface> = {
 export function limiterFactory(serverCtx: ServerContext): Limiter {
   return {
     limiter(options: RateLimitOptions): Server {
-      serverCtx.limiterOptions = options
+      if (!serverCtx.limiterOptions) serverCtx.limiterOptions = {}
+
+      if (serverCtx.prefix) {
+        if (!serverCtx.prefixLimiter[serverCtx.prefix]) serverCtx.prefixLimiter[serverCtx.prefix] = {}
+        serverCtx.prefixLimiter[serverCtx.prefix] = options               
+      } else if (serverCtx.version) {
+        if (!serverCtx.versionLimiter[serverCtx.version]) serverCtx.versionLimiter[serverCtx.version] = {}
+        serverCtx.versionLimiter[serverCtx.version] = options    
+      } else serverCtx.limiterOptions = options
       return serverFactory(serverCtx)
     }
   }
