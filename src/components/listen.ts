@@ -57,7 +57,5 @@ function parseRoute(routeOpts: WaffleRoute, serverCtx: ServerContext): any {
     onTimeout: versionHooks.onTimeout.concat(prefixHooks.onTimeout, routeOpts.onTimeout),
   }
 
-  console.log(parsedRoute)
-
   return parsedRoute
 }
