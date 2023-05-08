@@ -38,7 +38,7 @@ server.version(1) //API version management
 	.DELETE(":id").handler(async (req, rep) =>  /*.....*/)
 
 server.version(2)
-	.prefix("customers") //prefix/version/rout specific hooks and limiters
+	.prefix("customers") //prefix/version/route specific hooks and limiters
 	.limiter({max: 1, timeWindow: 60*1000})
 	.onRequest(async (req, rep) => console.log("on request customers hook")) 
 
