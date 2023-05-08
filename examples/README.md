@@ -1,3 +1,0 @@
-# Waffle Examples
-
-## Ping server
