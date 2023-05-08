@@ -6,3 +6,6 @@
 npm i @twoojoo/waffle
 ```
 
+## Examples
+
+See [eamples folder](./examples)
