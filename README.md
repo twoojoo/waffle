@@ -8,7 +8,7 @@ npm i @twoojoo/waffle
 
 ## Description
 
-Waffle allows you to spin up an HTTP server using [Fastyfy](https://github.com/fastify/fastify) with a completely **fluent syntax**. 
+Waffle allows you to easily build an HTTP server using [Fastyfy](https://github.com/fastify/fastify) with a completely **fluent syntax**. 
 It supports route types and schemas and all main Fastify features, while fully allowing to interact with the underlying Fastify instance.
 
 It also comes **shipped with some useful plugins** such as [rate limter](https://github.com/fastify/fastify-rate-limit), [cors](https://github.com/fastify/fastify-cors) and [json schema parser](https://www.npmjs.com/package/json-schema-to-ts), to further decrease development time.
