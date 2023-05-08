@@ -21,6 +21,7 @@ It's **typescript first**. If you provide json schemas (see [this example](./exa
 import { Waffle } from "../src"
 
 const server = Waffle({ logger: true })
+	//all Fastify hooks available
 	.onRequest(async (req, rep) => console.log("1) on request hook"))
 	.preParsing(async (req, rep) => console.log("2) pre parsing hook"))
 	.preValidation(async (req, rep) => console.log("3) pre validation hook"))
@@ -31,15 +32,22 @@ const server = Waffle({ logger: true })
 	.onResponse(async (req, rep) => console.log("6) on response hook"))
 	.limiter({max: 1, timeWindow: 60*1000}) 
 
-server.version(1)
-	.prefix("users")
+server.version(1) //API version management
+	.prefix("users") //API resource management
 	.GET(":id").handler(async (req, rep) => /*.....*/)
 	.DELETE(":id").handler(async (req, rep) =>  /*.....*/)
 
 server.version(2)
-	.prefix("customers")
-	.GET(":id").handler(async (req, rep) =>  /*.....*/)
-	.POST(":id").handler(async (req, rep) =>  /*.....*/)
+	.prefix("customers") //prefix/version/rout specific hooks and limiters
+	.limiter({max: 1, timeWindow: 60*1000})
+	.onRequest(async (req, rep) => console.log("on request customers hook")) 
+
+	.GET(":id")
+	.handler(async (req, rep) =>  /*.....*/)
+
+	.POST()
+	.bodySchema(bodySchema) //route json schema both for validation and type safety
+	.handler(async (req, rep) =>  console.log(req.body.name))
 
 server.address("localhost", 3001)
 	.listen()
