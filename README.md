@@ -18,7 +18,7 @@ It's **typescript first**. If you provide json schemas (see [this example](./exa
 ## Sample
 
 ```typescript
-import { Waffle } from "../src"
+import { Waffle } from "@twoojoo/waffle"
 
 const server = Waffle({ logger: true })
 	//all Fastify hooks available (at server, version, prefix or route level)
