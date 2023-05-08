@@ -11,7 +11,7 @@ npm i @twoojoo/waffle
 Waffle allows you to spin up an HTTP server using [Fastyfy](https://github.com/fastify/fastify) with a completely **fluent syntax**. 
 It supports route types and schemas and all main Fastify features, while fully allowing to interact with the underlying Fastify instance.
 
-It also comes **shipped with some useful plugins** such as [rate limter](), [cors]() and [json schema parser](), to further decrease development time.
+It also comes **shipped with some useful plugins** such as [rate limter](https://github.com/fastify/fastify-rate-limit), [cors](https://github.com/fastify/fastify-cors) and [json schema parser](https://www.npmjs.com/package/json-schema-to-ts), to further decrease development time.
 
 It's **typescript first**. If you provide json schemas (see [this example](./examples/validation.ts)), route types will be automatically inferred, achieving validation and type safety all at once!
 
@@ -31,6 +31,7 @@ const server = Waffle({ logger: true })
 	.onError(async (req, rep) => console.log("6) on error hook"))
 	.onResponse(async (req, rep) => console.log("6) on response hook"))
 	.limiter({max: 1, timeWindow: 60*1000}) 
+	.cors({/*..cors options..*/})
 
 server.version(1) //API version management
 	.prefix("users") //API resource management through route prefix
