@@ -9,7 +9,7 @@ const paramsSchema = {
 	properties: {
 		id: { type: 'number' }
 	}
-} as const
+} as const //important
 
 const bodySchema = {
 	type: 'object',
