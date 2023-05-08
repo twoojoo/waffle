@@ -7,7 +7,7 @@ type User = {
 	name: string,
 }
 
-type Params =  { id: number } 
+type Params = { id: number } 
 
 let users: User[] = [
 	{ id: 1, name: "John" }, 
@@ -17,7 +17,8 @@ let users: User[] = [
 
 // <mehtod> http://lcoalhost:3000/v1/users
 
-server.version(1)
+server
+	.version(1)
 	.prefix("users")
 
 	.GET<{ Params: Params }>(":id")

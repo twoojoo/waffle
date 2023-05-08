@@ -27,294 +27,52 @@
 </head>
 
 <body style="margin: 0;">
-  <!-- EXTERNAL LINKS -->
+    <div class="top-bar">
+      <a class="top-bar-item">npm</a>
+      <a class="top-bar-item">GitHub</a>
+    </div>
 
-  <div style="position: absolute; top: 0; left: 0;" id="home">
-    <div id="main-pane">
-      <div class="home-container">
-        <a href="./index.html" id="main-container">
-          <img id="waffle-image" src="./public/waffle.png" alt="logo">
-          <div id="main-title-container">
-            <div id="main-title" class="main-title prevent-select">Waffle</div>
-            <div id="main-subtitle" class="main-title prevent-select css-typing"></div>
-            <div id="subtitle-fill" class="main-title">---------------------------------------------------------------</div>
-                                                       <!-- A fluent Fastify wrapper that makes HTTP servers stupidly easy.</div> -->
+    <div class="main-pane">
+
+      <div class="main-pane-item">
+        <div class="pane">
+          <div class="title-pane">
+            <img class="title-img" src="./public/waffle.png" />
+            <div class="title-text">
+              <div class="title-text-title">Waffle</div>
+              <div class="title-text-subtitle">A fluent Fastify wrapper that makes HTTP servers stupidly easy.</div>
+            </div>
           </div>
-        </a>
-    </div>
-
-    <div class="code-sample" id="installation">
-      <div class="code-block">
-        <div class="copy-code prevent-select">&#x2398</div>
-        npm install @twoojoo/waffle
-      </div>
-      <div class="code-text prevent-select" align="left">
-        <div class="code-title" align="right">
-          Installation
         </div>
-      </div>
-    </div>
+      <div>
 
-    <div class="code-sample" id="ping">
-      <div class="code-text prevent-select" align="right">
-        <div class="code-title">One-line ping<br>pong server</div>
-        <div class="code-description">Default address:<br>0.0.0.0:80 </div>
-      </div>
-      <code class="code-block prettyprint">
-        <!-- <div class="copy-code prevent-select">&#x2398</div> -->
-        import { Waffle } from "@twoojoo/waffle" //this line doesn't count U.U<br><br>
-        Waffle().GET("/ping").handler(async (_, rep) => rep.send("pong")).listen()
-      </code>
-    </div>
-
-    <div class="code-sample" id="rest">
-      <code class="code-block prettyprint">
-        <!-- <div class="copy-code prevent-select">&#x2398</div> -->
-        import { Waffle } from "@twoojoo/waffle"<br><br>
-
-        const server = Waffle({ logger: true })<br>
-        &emsp;&emsp;&emsp;.address("localhost", 3000)<br><br>
-
-        type User = {<br>
-        &emsp;&emsp;&emsp;id: number,<br>
-        &emsp;&emsp;&emsp;name: string,<br>
-        }<br><br>
-
-        type Params = { id: number }<br><br>
-
-        let users: User[] = [<br>
-        &emsp;&emsp;&emsp;{ id: 1, name: "John" }, <br>
-        &emsp;&emsp;&emsp;{ id: 2, name: "Angela" }, <br>
-        &emsp;&emsp;&emsp;{ id: 3, name: "Bob" }<br>
-        ]<br><br>
-
-        server.version(1)<br>
-        &emsp;&emsp;&emsp;.prefix("users")<br><br>
-
-        &emsp;&emsp;&emsp;.GET<{ Params: Params }>(":id")<br>
-          &emsp;&emsp;&emsp;.handler(async (req, rep) => rep.send(users.find(u => u.id == req.params.id)))<br><br>
-
-          &emsp;&emsp;&emsp;.DELETE<{ Params: Params }>(":id")<br>
-            &emsp;&emsp;&emsp;.handler(async (req, rep) => {<br>
-            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;const id = (req.params as any).id<br>
-            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;const user = users.find(u => u == id)<br>
-            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;users = users.filter(u => u != id)<br>
-            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;rep.send(user)<br>
-            &emsp;&emsp;&emsp;})<br><br>
-
-            &emsp;&emsp;&emsp;.POST<{ Body: User }>()<br>
-              &emsp;&emsp;&emsp;.handler(async (req, rep) => {<br>
-              &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;users.push(req.body)<br>
-              &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;rep.send(req.body)<br>
-              &emsp;&emsp;&emsp;})<br><br>
-
-              &emsp;&emsp;&emsp;.PUT<{ Params: Params, Body: Omit&lt;User, "id" &gt; }>(":id")<br>
-                &emsp;&emsp;&emsp;.handler(async (req, rep) => {<br>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;const index = users.findIndex(u => u.id == req.params.id)<br>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;users[index].name = req.body.name<br>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;rep.send(users[index])<br>
-                &emsp;&emsp;&emsp;})<br>
-      </code>
-      <div class="code-text prevent-select" align="left" style="justify-content: start; gap: 3vh; padding: 3vh;">
-        <div class="code-title">Rest API</div>
-        <div class="code-description">CRUD operations at<br>localhost:3000/v1/users</div>
-        <div class="code-description">Define Body, Params,<br>Query and Reply types<br>as <a href="https://www.fastify.io/docs/latest/Reference/TypeScript/#using-generics" style="text-decoration: underline;" target="_blank">generics</a> (automatically<br>provided when schemas are<br>used - see below)</div>
-        <div class="code-description">Easily set API <a>version</a><br>and routes <a>prefixes</a></div>
-        <div class="code-description code-hint"><a>☀</a>  Functions chaining allows<br>for a declarative and dynamic<br>developing approach (code<br>suggestion will be your <br>best friend)</div>
-      </div>
-    </div>
-
-    <div class="code-sample" id="hooks">
-      <div class="code-text prevent-select" align="right">
-        <div class="code-title">Hooks & Rate Limiter</div>
-        <div class="code-description">All fastify <a href="https://www.fastify.io/docs/latest/Reference/Hooks/"
-            style="text-decoration: underline;" target="_blank">hooks</a><br>available</div>
-        <div class="code-description">Built-in <a href="https://github.com/fastify/fastify-rate-limit#options"
-            style="text-decoration: underline;" target="_blank">rate<br>limiter</a></div>
-        <div class="code-description"><a>Route-specific</a> limters and hooks</div>
-        <div class="code-description code-hint"><a>☀</a> Everything you declare<br> between the HTTP<br> method and the handler<br> is route-specific</div>
-      </div>
-      <code class="code-block prettyprint">
-        <!-- <div class="copy-code prevent-select">&#x2398</div> -->
-        import { Waffle } from "@twoojoo/waffle"<br><br>
-
-        const server = Waffle({ logger: true })<br>
-        &emsp;&emsp;&emsp;.onRequest(async (req, rep) => console.log("1) on request hook"))<br>
-        &emsp;&emsp;&emsp;.preParsing(async (req, rep) => console.log("2) pre parsing hook"))<br>
-        &emsp;&emsp;&emsp;.preValidation(async (req, rep) => console.log("3) pre validation hook"))<br>
-        &emsp;&emsp;&emsp;.preHandler(async (req, rep) => console.log("4) pre handler hook"))<br>
-        &emsp;&emsp;&emsp;.preSerialization(async (req, rep) => console.log("5) pre serialization hook"))<br>
-        &emsp;&emsp;&emsp;.onSend(async (req, rep) => console.log("6) on send hook"))<br>
-        &emsp;&emsp;&emsp;.limiter({max: 200, timeWindow: 60*1000}) //max 200 request per minute globally<br><br>
-
-        server.version(1)<br>
-        &emsp;&emsp;&emsp;.prefix("users")<br>
-        &emsp;&emsp;&emsp;.GET(":id").handler(async (req, rep) => rep.send({ id: req.params.id }))<br><br>
-
-        server.version(2)<br>
-        &emsp;&emsp;&emsp;.prefix("customers")<br>
-        &emsp;&emsp;&emsp;.GET(":id")<br>
-        &emsp;&emsp;&emsp;.onRequest(async (req, rep) => console.log("1) on request route hook"))<br>
-        &emsp;&emsp;&emsp;.limiter({max: 2, timeWindow: 60*1000}) //max 2 requests per minute (route-only) <br>
-        &emsp;&emsp;&emsp;.handler(async (req, rep) => rep.send({ id: req.params.id }))<br><br>
-
-        server.address("localhost", 3001)<br>
-        &emsp;&emsp;&emsp;.listen()<br>
-      </code>
-    </div>
-
-    <div class="code-sample" id="installation">
-      <code class="code-block prettyprint">
-        <!-- <div class="copy-code prevent-select">&#x2398</div> -->
-        import { Waffle } from "@twoojoo/waffle"<br><br>
-
-const server = Waffle()<br>
-  &emsp;&emsp;&emsp;.address("localhost", 3000)<br><br>
-
-const paramsSchema = {<br>
-  &emsp;&emsp;&emsp;type: 'object',<br>
-  &emsp;&emsp;&emsp;required: ['id'],<br>
-  &emsp;&emsp;&emsp;properties: {<br>
-  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;id: { type: 'number' }<br>
-  &emsp;&emsp;&emsp;}<br>
-}<br><br>
-
-const bodySchema = {<br>
-&emsp;&emsp;&emsp;type: 'object',<br>
-&emsp;&emsp;&emsp;required: ['name'],<br>
-&emsp;&emsp;&emsp;properties: {<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;name: { type: 'string' }<br>
-&emsp;&emsp;&emsp;}<br>
-}<br><br>
-
-const queryStringSchema = {<br>
-&emsp;&emsp;&emsp;type: 'object',<br>
-&emsp;&emsp;&emsp;required: ['key'],<br>
-&emsp;&emsp;&emsp;properties: {<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;key: { type: 'string' }<br>
-&emsp;&emsp;&emsp;}<br>
-}<br><br>
-
-const headersSchema = {<br>
-&emsp;&emsp;&emsp;type: 'object',<br>
-&emsp;&emsp;&emsp;required: ['myRequiredHeader'],<br>
-&emsp;&emsp;&emsp;properties: {<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;myRequiredHeader: { const: 'myHeaderValue' }<br>
-&emsp;&emsp;&emsp;}<br>
-}<br><br>
-
-const responseSchema = {<br>
-&emsp;&emsp;&emsp;200: { type: 'string' }<br>
-}<br><br>
-
-server.version(1)<br>
-&emsp;&emsp;&emsp;.prefix("users")<br><br>
-
-&emsp;&emsp;&emsp;.PUT(":id")<br>
-&emsp;&emsp;&emsp;.paramsSchema(paramsSchema)<br>
-&emsp;&emsp;&emsp;.bodySchema(bodySchema)<br>
-&emsp;&emsp;&emsp;.querySchema(queryStringSchema)<br>
-&emsp;&emsp;&emsp;.headersSchema(headersSchema)<br>
-&emsp;&emsp;&emsp;.responseSchema(responseSchema)<br>
-&emsp;&emsp;&emsp;.handler(async (_, rep) => rep.send("all schemas are OK"))<br><br>
-
-server.listen({}, (err, addr) => {<br>
-&emsp;&emsp;&emsp;if (err) console.error(err)<br>
-&emsp;&emsp;&emsp;else console.log(`server listening at`, addr)<br>
-})<br><br>
-
-      </code>
-      <div class="code-text" align="left">
-        <div class="code-title  prevent-select" align="left">
-          Validation
+      <div class="main-pane-item">
+        <div class="pane">
+          <div class="pane-title">Rest API</div>
+          <div class="pane-content">
+            <code class="prettyprint">const variable = "value";<br><br>function ababa() {<br>const myVr = 123<br>};</code>
+            <div class="code-description-container">
+              <div class="code-description">
+                <div class="code-description-title">title</div>
+                <div class="code-description-text">text of the description</div>
+              </div>
+              <div class="code-description">
+                <div class="code-description-title">title</div>
+                <div class="code-description-text">text of the description</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="code-description  prevent-select">Use JSON schema to <a href="https://www.fastify.io/docs/latest/Reference/Validation-and-Serialization/"
-            style="text-decoration: underline;" target="_blank">validate</a><br>all route components (body,<br>params, query string and<br> headers)</div>
-        <div class="code-description code-hint"><text class="prevent-select"><a>☀</a> CURL request that will pass<br>the validation:<br></text><br><a>curl -X PUT \<br>http://localhost:3000/v1/users/1?key=foo \<br>-d '{"name":"Bob"}' \<br>-H "Content-Type: application/json" \<br>-H 'myRequiredHeader:myHeaderValue'</a></div>
-        <div class="code-description  prevent-select">Keep in mind that you can use<br><a href="https://www.fastify.io/docs/latest/Guides/Fluent-Schema/"
-            style="text-decoration: underline;" target="_blank">Fluent Schema</a> as suggested in the<br>Fastify docs</div>
-            <div class="code-title  prevent-select" align="left" style="margin-top: 8vh;">
-          Automatic Types!
+      <div>
+
+      <div class="main-pane-item">
+        <div class="pane">
+          <div class="pane-title">Validation</div>
+          <div class="pane-content"></div>
         </div>
-        <div class="code-description code-hint prevent-select"><a>☀</a> Waffle automatically parses<br>your schemas into <a>Typescript types</a><br>as if you were using generics:<br><br>
-        <code class="code-block prettyprint" style="width: 82%;">
-//....<br><br>
-const bodySchema = {<br>
-&emsp;&emsp;&emsp;type: 'object',<br>
-&emsp;&emsp;&emsp;required: ['name'],<br>
-&emsp;&emsp;&emsp;properties: {<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;name: { type: 'string' }<br>
-&emsp;&emsp;&emsp;}<br>
-} as const //important<br><br>
-server.PUT("/path")<br>
-&emsp;&emsp;&emsp;.bodySchema(bodySchema)<br>
-&emsp;&emsp;&emsp;.handler(async (_, rep) => {<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//autocompletion works here<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;console.log(req.body.name)<br> 
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;rep.send("ok")<br>
-&emsp;&emsp;&emsp;})<br><br>
-//....<br>
-        </code>
-       <p style="margin: 1vh; font-size: 15px;">When using both, generic types are overriden<br>by the ones inferred from schemas</p>
-      </div>
-      </div>
-    </div>
+      <div>
 
-    <div class="code-sample" id="ping">
-      <div class="code-text prevent-select" align="right">
-        <div class="code-title">Need a missing feature?</div>
-        <div class="code-description">Waffle isn't gelous and<br>lets you manipulate the<br>underlying Fastify<br>instance</div>
-      </div>
-      <code class="code-block prettyprint">
-        <!-- <div class="copy-code prevent-select">&#x2398</div> -->
-        import { Waffle } from "@twoojoo/waffle"<br><br>
-        const server = Waffle().address("localhost", 3000)<br><br>
-        server.fastify.register(/*--custom-logic--*/)<br><br>
-        server.listen()
-      </code>
-    </div>
-
-      <div class="code-sample" id="next">
-      <div class="code-text prevent-select" align="left">
-        <div class="code-title" align="center">
-          Next steps
-        </div>
-        <div class="code-description" align="center">Support to all HTTP methods</div>
-        <!-- <div class="code-description" align="center"><a>Routes-specific</a> hooks and limiters</a></div> -->
-      </div>
-    </div>
-  </div>
-
-  <div id="easter" class="code-description prevent-select" style="padding-bottom: 2vh;" align="center">
-    <a style="font-family: Kavoon;">W</a>hat 
-    <a style="font-family: Kavoon;">A</a> 
-    <a style="font-family: Kavoon;">F</a>luent 
-    <a style="font-family: Kavoon;">F</a>astify 
-    <a style="font-family: Kavoon;">L</a>everaging 
-    <a style="font-family: Kavoon;">E</a>xperience
-  </div>
-  <div class="code-description prevent-select" align="center" style="padding-bottom: 4vh;"><i>by TwooJoo<i></div>
-
-  </div>
-
-  <div id="external-links">
-    <a target="_blank" href="https://github.com/twoojoo/waffle"><svg xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 496 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-        <path fill="currentColor"
-          d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" />
-      </svg></a>
-
-    <br>
-    <br>
-
-    <a target="_blank" href="https://www.npmjs.com/package/@twoojoo/waffle"><svg xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 576 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-        <path fill="currentColor"
-          d="M288 288h-32v-64h32v64zm288-128v192H288v32H160v-32H0V160h576zm-416 32H32v128h64v-96h32v96h32V192zm160 0H192v160h64v-32h64V192zm224 0H352v128h64v-96h32v96h32v-96h32v96h32V192z" />
-      </svg>
-    </a>    
-    </div>
-  
+    <div>
     <script src="./index.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?skin=sunburst&lang="></script>
 </body>
