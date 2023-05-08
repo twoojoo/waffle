@@ -21,7 +21,7 @@ It's **typescript first**. If you provide json schemas (see [this example](./exa
 import { Waffle } from "../src"
 
 const server = Waffle({ logger: true })
-	//all Fastify hooks available
+	//all Fastify hooks available (at server, version, prefix or route level)
 	.onRequest(async (req, rep) => console.log("1) on request hook"))
 	.preParsing(async (req, rep) => console.log("2) pre parsing hook"))
 	.preValidation(async (req, rep) => console.log("3) pre validation hook"))
@@ -33,21 +33,21 @@ const server = Waffle({ logger: true })
 	.limiter({max: 1, timeWindow: 60*1000}) 
 
 server.version(1) //API version management
-	.prefix("users") //API resource management
-	.GET(":id").handler(async (req, rep) => /*.....*/)
-	.DELETE(":id").handler(async (req, rep) =>  /*.....*/)
+	.prefix("users") //API resource management through route prefix
+	.GET(":id").handler(async (req, rep) =>  /*...route logic..*/) // GET http://localhost:3001/v1/users/:id
+	.DELETE(":id").handler(async (req, rep) =>   /*...route logic..*/) // DELETE http://localhost:3001/v1/users/:id
 
 server.version(2)
-	.prefix("customers") //prefix/version/route specific hooks and limiters
+	.prefix("customers") //prefix specific hooks and limiters
 	.limiter({max: 1, timeWindow: 60*1000})
 	.onRequest(async (req, rep) => console.log("on request customers hook")) 
 
-	.GET(":id")
-	.handler(async (req, rep) =>  /*.....*/)
+	.GET(":id")  // GET http://localhost:3001/v1/customers/:id
+	.handler(async (req, rep) =>  /*...route logic..*/)
 
-	.POST()
+	.POST()  // POST http://localhost:3001/v1/customers
 	.bodySchema(bodySchema) //route json schema both for validation and type safety
-	.handler(async (req, rep) =>  console.log(req.body.name))
+	.handler(async (req, rep) =>  console.log(req.body.name)) // <-- autocomplete
 
 server.address("localhost", 3001)
 	.listen()
